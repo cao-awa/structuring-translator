@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public abstract class ApsTranslator<T extends LanguageAst> implements LanguageElementTranslator<T> {
-    private static final Map<TranslateTarget, Map<TranslateElementData<?>, ApsTranslator<?>>> translators = CollectionFactor.hashMap();
+public abstract class LanguageTranslator<T extends LanguageAst> implements LanguageElementTranslator<T> {
+    private static final Map<TranslateTarget, Map<TranslateElementData<?>, LanguageTranslator<?>>> translators = CollectionFactor.hashMap();
     private StringBuilder builder;
     private T ast;
 
@@ -32,11 +32,11 @@ public abstract class ApsTranslator<T extends LanguageAst> implements LanguageEl
         this.ast = ast;
     }
 
-    public static <X extends LanguageAst> void registerJava(TranslateElementData<X> element, ApsTranslator<?> translator) {
+    public static <X extends LanguageAst> void registerJava(TranslateElementData<X> element, LanguageTranslator<?> translator) {
         register(TranslateTarget.JAVA, element, translator);
     }
 
-    public static <X extends LanguageAst> void register(TranslateTarget target, TranslateElementData<X> element, ApsTranslator<?> translator) {
+    public static <X extends LanguageAst> void register(TranslateTarget target, TranslateElementData<X> element, LanguageTranslator<?> translator) {
         translators.compute(target, (key, map) -> {
             if (map == null) {
                 map = CollectionFactor.hashMap();
@@ -86,20 +86,20 @@ public abstract class ApsTranslator<T extends LanguageAst> implements LanguageEl
         postTranslate(element, nextAst.apply(this.ast));
     }
 
-    public static <X extends LanguageAst> ApsTranslator<X> translator(TranslateTarget target, TranslateElementData<X> element) {
+    public static <X extends LanguageAst> LanguageTranslator<X> translator(TranslateTarget target, TranslateElementData<X> element) {
         return Manipulate.cast(translators.get(target).get(element));
     }
 
-    public <X extends LanguageAst> ApsTranslator<X> translator(TranslateElementData<X> element) {
+    public <X extends LanguageAst> LanguageTranslator<X> translator(TranslateElementData<X> element) {
         return Manipulate.cast(translators.get(target()).get(element));
     }
 
-    public <X extends LanguageAst> void translator(TranslateElementData<X> element, Consumer<ApsTranslator<X>> action) {
+    public <X extends LanguageAst> void translator(TranslateElementData<X> element, Consumer<LanguageTranslator<X>> action) {
         if (element == null) {
             return;
         }
         T recovery = this.ast;
-        ApsTranslator<X> ast = Manipulate.cast(translators.get(target()).get(element));
+        LanguageTranslator<X> ast = Manipulate.cast(translators.get(target()).get(element));
         if (ast == null) {
             return;
         }

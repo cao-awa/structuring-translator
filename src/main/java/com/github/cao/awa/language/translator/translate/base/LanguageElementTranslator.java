@@ -1,6 +1,6 @@
 package com.github.cao.awa.language.translator.translate.base;
 
-import com.github.cao.awa.language.translator.translate.ApsTranslator;
+import com.github.cao.awa.language.translator.translate.LanguageTranslator;
 import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
 import com.github.cao.awa.language.translator.translate.tree.modifier.ElementModifier;
 import com.github.cao.awa.language.translator.translate.tree.modifier.ModifierRequiredAst;
@@ -20,7 +20,7 @@ public interface LanguageElementTranslator<T extends LanguageAst> {
         return new byte[0];
     }
 
-    default void braces(ApsTranslator<T> translator, Consumer<ApsTranslator<T>> body) {
+    default void braces(LanguageTranslator<T> translator, Consumer<LanguageTranslator<T>> body) {
         StringBuilder builder = translator.builder();
 
         builder.append("{");
@@ -28,11 +28,11 @@ public interface LanguageElementTranslator<T extends LanguageAst> {
         builder.append("}");
     }
 
-    default void braceOr(ApsTranslator<T> translator, Predicate<T> predicate, Consumer<ApsTranslator<T>> body) {
+    default void braceOr(LanguageTranslator<T> translator, Predicate<T> predicate, Consumer<LanguageTranslator<T>> body) {
         braceOr(translator, predicate, body, body);
     }
 
-    default void braceOr(ApsTranslator<T> translator, Predicate<T> predicate, Consumer<ApsTranslator<T>> bodyWhenBrace, Consumer<ApsTranslator<T>> bodyWhenNotBrace) {
+    default void braceOr(LanguageTranslator<T> translator, Predicate<T> predicate, Consumer<LanguageTranslator<T>> bodyWhenBrace, Consumer<LanguageTranslator<T>> bodyWhenNotBrace) {
         if (predicate.test(translator.ast())) {
             braces(translator, bodyWhenBrace);
         } else {
@@ -40,7 +40,7 @@ public interface LanguageElementTranslator<T extends LanguageAst> {
         }
     }
 
-    default void paren(ApsTranslator<T> translator, Consumer<ApsTranslator<T>> body) {
+    default void paren(LanguageTranslator<T> translator, Consumer<LanguageTranslator<T>> body) {
         StringBuilder builder = translator.builder();
 
         builder.append("(");
@@ -48,11 +48,11 @@ public interface LanguageElementTranslator<T extends LanguageAst> {
         builder.append(")");
     }
 
-    default void or(ApsTranslator<T> translator, Predicate<T> predicate, Consumer<ApsTranslator<T>> body) {
+    default void or(LanguageTranslator<T> translator, Predicate<T> predicate, Consumer<LanguageTranslator<T>> body) {
         or(translator, predicate, body, body);
     }
 
-    default void or(ApsTranslator<T> translator, Predicate<T> predicate, Consumer<ApsTranslator<T>> bodyWhenTrue, Consumer<ApsTranslator<T>> bodyWhenFalse) {
+    default void or(LanguageTranslator<T> translator, Predicate<T> predicate, Consumer<LanguageTranslator<T>> bodyWhenTrue, Consumer<LanguageTranslator<T>> bodyWhenFalse) {
         if (predicate.test(translator.ast())) {
             bodyWhenTrue.accept(translator);
         } else {
@@ -60,11 +60,11 @@ public interface LanguageElementTranslator<T extends LanguageAst> {
         }
     }
 
-    default void parenOr(ApsTranslator<T> translator, Predicate<T> predicate, Consumer<ApsTranslator<T>> body) {
+    default void parenOr(LanguageTranslator<T> translator, Predicate<T> predicate, Consumer<LanguageTranslator<T>> body) {
         parenOr(translator, predicate, body, body);
     }
 
-    default void parenOr(ApsTranslator<T> translator, Predicate<T> predicate, Consumer<ApsTranslator<T>> bodyWhenParen, Consumer<ApsTranslator<T>> bodyWhenNotParen) {
+    default void parenOr(LanguageTranslator<T> translator, Predicate<T> predicate, Consumer<LanguageTranslator<T>> bodyWhenParen, Consumer<LanguageTranslator<T>> bodyWhenNotParen) {
         if (predicate.test(translator.ast())) {
             paren(translator, bodyWhenParen);
         } else {
@@ -72,20 +72,20 @@ public interface LanguageElementTranslator<T extends LanguageAst> {
         }
     }
 
-    default void translateAccessible(ApsTranslator<T> translator) {
+    default void translateAccessible(LanguageTranslator<T> translator) {
         if (translator.ast() instanceof ModifierRequiredAst<?> modifierRequired) {
             translator.append(modifierRequired.accessible().getAccessibleType().literal());
             translator.append(" ");
         }
     }
 
-    default void splitModifiersBySpace(ApsTranslator<T> translator) {
+    default void splitModifiersBySpace(LanguageTranslator<T> translator) {
         if (translator.ast() instanceof ModifierRequiredAst<?> modifierRequired) {
             splitModifiersBy(translator, modifierRequired.modifierValues(), " ");
         }
     }
 
-    default void splitModifiersBy(ApsTranslator<T> translator, Collection<? extends ElementModifier<?>> modifiers, String split) {
+    default void splitModifiersBy(LanguageTranslator<T> translator, Collection<? extends ElementModifier<?>> modifiers, String split) {
         for (ElementModifier<?> modifier : modifiers) {
             if (modifier.isLiteral()) {
                 translator.append(modifier.literal());

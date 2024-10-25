@@ -39,7 +39,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/cao-awa/Catheter")
             credentials {
                 username = System.getenv("GH_ACTOR")
-                password = System.getenv("PUBLISH_TOKEN")
+                password = System.getenv("GH_TOKEN")
             }
         }
     }

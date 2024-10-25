@@ -9,11 +9,11 @@ public abstract class LanguageAst {
         this.parent = parent;
     }
 
-    public LanguageAst getParent() {
+    public LanguageAst parent() {
         return this.parent;
     }
 
-    public void setParent(LanguageAst parent) {
+    public void parent(LanguageAst parent) {
         this.parent = parent;
     }
 

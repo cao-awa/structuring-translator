@@ -36,6 +36,10 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
         register(TranslateTarget.JAVA, element, translator);
     }
 
+    public static <X extends LanguageAst> void registerKotlinScript(TranslateElementData<X> element, LanguageTranslator<?> translator) {
+        register(TranslateTarget.KOTLIN_SCRIPT, element, translator);
+    }
+
     public static <X extends LanguageAst> void register(TranslateTarget target, TranslateElementData<X> element, LanguageTranslator<?> translator) {
         translators.compute(target, (key, map) -> {
             if (map == null) {

@@ -28,7 +28,7 @@ public abstract class LanguageAst {
     }
 
     public void print(String ident, boolean endElement) {
-        print(ident);
+//        print(ident);
     }
 
     public void prepares() {
@@ -48,11 +48,19 @@ public abstract class LanguageAst {
         if (getClass() == target) {
             return (T) this;
         } else {
+            T posted = postFindAst(target);
+            if (posted != null) {
+                return posted;
+            }
             if (this.parent != null) {
                 return this.parent.findAst(target);
             } else {
                 return null;
             }
         }
+    }
+
+    public <T extends LanguageAst> T postFindAst(Class<T> target) {
+        return null;
     }
 }

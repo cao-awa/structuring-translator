@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSONWriter;
 import com.github.cao.awa.language.translator.builtin.typescript.antlr.TypescriptLexer;
 import com.github.cao.awa.language.translator.builtin.typescript.antlr.TypescriptParser;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.element.TypescriptTranslateElement;
-import com.github.cao.awa.language.translator.builtin.typescript.translate.java.TypescriptKotlinScriptTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.TypescriptKotlinScriptTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.TypescriptFile;
 import com.github.cao.awa.language.translator.builtin.typescript.visitor.LanguageTypescriptVisitor;
 import com.github.cao.awa.language.translator.translate.LanguageTranslator;

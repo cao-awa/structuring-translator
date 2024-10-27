@@ -119,9 +119,15 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
         return builder.toString();
     }
 
+    public <X extends LanguageAst> void postTranslate(String provider, TranslateElementData<X> element, X ast) {
+        T recovery = this.ast;
+        translator(provider, element).postTranslate(this.builder, ast);
+        this.ast = recovery;
+    }
+
     public <X extends LanguageAst> void postTranslate(TranslateElementData<X> element, X ast) {
         T recovery = this.ast;
-        translator(element).postTranslate(this.builder, ast);
+        translator(this.requiredProvider, element).postTranslate(this.builder, ast);
         this.ast = recovery;
     }
 

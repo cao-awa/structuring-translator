@@ -12,9 +12,16 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class LanguageTranslator<T extends LanguageAst> implements LanguageElementTranslator<T> {
-    private static final Map<TranslateTarget, Map<TranslateElementData<?>, LanguageTranslator<?>>> translators = CollectionFactor.hashMap();
+    public static final String defaultProvider = "generic";
+    private static final Map<String, Map<TranslateTarget, Map<TranslateElementData<?>, LanguageTranslator<?>>>> translators = CollectionFactor.hashMap();
     private StringBuilder builder;
     private T ast;
+    private String requiredProvider = defaultProvider;
+
+    public LanguageTranslator<T> requestProvider(final String provider) {
+        this.requiredProvider = provider;
+        return this;
+    }
 
     public StringBuilder builder() {
         return this.builder;
@@ -32,29 +39,61 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
         this.ast = ast;
     }
 
-    public static <X extends LanguageAst> void registerJava(TranslateElementData<X> element, LanguageTranslator<?> translator) {
-        register(TranslateTarget.JAVA, element, translator);
+    public static <X extends LanguageAst> void registerJava(String provider, TranslateElementData<X> element, LanguageTranslator<?> translator) {
+        register(provider, TranslateTarget.JAVA, element, translator);
     }
 
-    public static <X extends LanguageAst> void registerKotlinScript(TranslateElementData<X> element, LanguageTranslator<?> translator) {
-        register(TranslateTarget.KOTLIN_SCRIPT, element, translator);
+    public static <X extends LanguageAst> void registerKotlinScript(String provider, TranslateElementData<X> element, LanguageTranslator<?> translator) {
+        register(provider, TranslateTarget.KOTLIN_SCRIPT, element, translator);
     }
 
-    public static <X extends LanguageAst> void register(TranslateTarget target, TranslateElementData<X> element, LanguageTranslator<?> translator) {
-        translators.compute(target, (key, map) -> {
+    public static <X extends LanguageAst> void register(String provider, TranslateTarget target, TranslateElementData<X> element, LanguageTranslator<?> translator) {
+        translators.compute(provider, (key, map) -> {
             if (map == null) {
                 map = CollectionFactor.hashMap();
             }
 
-            map.put(element, translator);
+            map.computeIfAbsent(target, k -> CollectionFactor.hashMap());
+
+            map.get(target).put(element, translator);
 
             return map;
         });
     }
 
+    public static Map<TranslateTarget, Map<TranslateElementData<?>, LanguageTranslator<?>>> getTranslators(String provider) {
+        Map<TranslateTarget, Map<TranslateElementData<?>, LanguageTranslator<?>>> ts = translators.get(provider);
+        if (ts == null) {
+            ts = translators.get(defaultProvider);
+        }
+        return ts;
+    }
+
+    public static LanguageTranslator<?> getLanguageTranslator(String provider, TranslateTarget target, TranslateElementData<?> element) {
+        LanguageTranslator<?> translator = getTranslators(provider).get(target).get(element);
+        if (translator == null && !defaultProvider.equals(provider)) {
+            return getLanguageTranslator(defaultProvider, target, element);
+        }
+        return translator;
+    }
+
+    public static LanguageTranslator<?> getLanguageTranslator(TranslateTarget target, TranslateElementData<?> element) {
+        LanguageTranslator<?> translator = getTranslators(defaultProvider).get(target).get(element);
+        if (translator == null) {
+            return getLanguageTranslator(defaultProvider, target, element);
+        }
+        return translator;
+    }
+
+    public static <X extends LanguageAst> String translate(String provider, TranslateTarget target, TranslateElementData<X> element, X ast) {
+        StringBuilder builder = new StringBuilder();
+        getLanguageTranslator(provider, target, element).requestProvider(provider).postTranslate(builder, Manipulate.cast(ast));
+        return builder.toString();
+    }
+
     public static <X extends LanguageAst> String translate(TranslateTarget target, TranslateElementData<X> element, X ast) {
         StringBuilder builder = new StringBuilder();
-        translators.get(target).get(element).postTranslate(builder, Manipulate.cast(ast));
+        getLanguageTranslator(defaultProvider, target, element).requestProvider(defaultProvider).postTranslate(builder, Manipulate.cast(ast));
         return builder.toString();
     }
 
@@ -90,12 +129,20 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
         postTranslate(element, nextAst.apply(this.ast));
     }
 
+    public static <X extends LanguageAst> LanguageTranslator<X> translator(String provider, TranslateTarget target, TranslateElementData<X> element) {
+        return Manipulate.cast(getLanguageTranslator(provider, target, element));
+    }
+
     public static <X extends LanguageAst> LanguageTranslator<X> translator(TranslateTarget target, TranslateElementData<X> element) {
-        return Manipulate.cast(translators.get(target).get(element));
+        return Manipulate.cast(getLanguageTranslator(defaultProvider, target, element));
+    }
+
+    public <X extends LanguageAst> LanguageTranslator<X> translator(String provider, TranslateElementData<X> element) {
+        return Manipulate.cast(getLanguageTranslator(provider, target(), element));
     }
 
     public <X extends LanguageAst> LanguageTranslator<X> translator(TranslateElementData<X> element) {
-        return Manipulate.cast(translators.get(target()).get(element));
+        return Manipulate.cast(getLanguageTranslator(target(), element));
     }
 
     public <X extends LanguageAst> void translator(TranslateElementData<X> element, Consumer<LanguageTranslator<X>> action) {
@@ -103,7 +150,7 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
             return;
         }
         T recovery = this.ast;
-        LanguageTranslator<X> ast = Manipulate.cast(translators.get(target()).get(element));
+        LanguageTranslator<X> ast = Manipulate.cast(getLanguageTranslator(this.requiredProvider, target(), element));
         if (ast == null) {
             return;
         }

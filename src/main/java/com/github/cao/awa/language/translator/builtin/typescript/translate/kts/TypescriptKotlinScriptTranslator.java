@@ -1,7 +1,6 @@
 package com.github.cao.awa.language.translator.builtin.typescript.translate.kts;
 
 import com.github.cao.awa.language.translator.builtin.typescript.translate.element.TypescriptTranslateElement;
-import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.TypescriptKotlinScriptFileTestTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.TypescriptKotlinScriptFileTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.constant.TypescriptKotlinScriptConstantTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.constant.bool.TypescriptKotlinScriptBooleanTranslator;
@@ -38,8 +37,6 @@ import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
 
 public abstract class TypescriptKotlinScriptTranslator<T extends LanguageAst> extends LanguageTranslator<T> {
     public static void postRegister() {
-        registerKotlinScript("test", TypescriptTranslateElement.FILE, new TypescriptKotlinScriptFileTestTranslator());
-
         registerKotlinScript(defaultProvider, TypescriptTranslateElement.FILE, new TypescriptKotlinScriptFileTranslator());
         registerKotlinScript(defaultProvider, TypescriptTranslateElement.STATEMENT, new TypescriptKotlinScriptStatementTranslator());
         registerKotlinScript(defaultProvider, TypescriptTranslateElement.DEFINE_VARIABLE, new TypescriptKotlinScriptDefineVariableTranslator());

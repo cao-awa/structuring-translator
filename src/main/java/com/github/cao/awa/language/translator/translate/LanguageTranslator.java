@@ -72,7 +72,10 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
     public static LanguageTranslator<?> getLanguageTranslator(String provider, TranslateTarget target, TranslateElementData<?> element) {
         LanguageTranslator<?> translator = getTranslators(provider).get(target).get(element);
         if (translator == null && !defaultProvider.equals(provider)) {
-            return getLanguageTranslator(defaultProvider, target, element);
+            translator = getLanguageTranslator(defaultProvider, target, element);
+        }
+        if (translator != null) {
+            translator.requestProvider(provider);
         }
         return translator;
     }
@@ -148,7 +151,7 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
     }
 
     public <X extends LanguageAst> LanguageTranslator<X> translator(TranslateElementData<X> element) {
-        return Manipulate.cast(getLanguageTranslator(target(), element));
+        return Manipulate.cast(getLanguageTranslator(this.requiredProvider, target(), element));
     }
 
     public <X extends LanguageAst> void translator(TranslateElementData<X> element, Consumer<LanguageTranslator<X>> action) {
@@ -156,11 +159,11 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
             return;
         }
         T recovery = this.ast;
-        LanguageTranslator<X> ast = Manipulate.cast(getLanguageTranslator(this.requiredProvider, target(), element));
-        if (ast == null) {
+        LanguageTranslator<X> translator = Manipulate.cast(getLanguageTranslator(this.requiredProvider, target(), element));
+        if (translator == null) {
             return;
         }
-        action.accept(ast);
+        action.accept(translator);
         this.ast = recovery;
     }
 }

@@ -12,7 +12,7 @@ import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action.TypescriptSelfDecrement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action.TypescriptSelfIncrement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.TypescriptCalculate;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.ApsOperators;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.TypescriptOperators;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.TypescriptSymbol;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.function.TypescriptFunction;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.function.TypescriptParamList;
@@ -277,7 +277,7 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
         }
 
         if (ctx.not() != null) {
-            return ApsOperators.NOT;
+            return TypescriptOperators.NOT;
         }
 
         return null;
@@ -294,15 +294,19 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
         }
 
         if (ctx.moreThan() != null) {
-            return ApsOperators.MORE_THAN;
+            return TypescriptOperators.MORE_THAN;
         }
 
         if (ctx.lessThan() != null) {
-            return ApsOperators.LESS_THAN;
+            return TypescriptOperators.LESS_THAN;
         }
 
         if (ctx.Equals() != null) {
-            return ApsOperators.EQUALS;
+            return TypescriptOperators.EQUALS;
+        }
+
+        if (ctx.StricEquals() != null) {
+            return TypescriptOperators.STRICT_EQUALS;
         }
 
         return null;
@@ -311,11 +315,11 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
     @Override
     public TypescriptSymbol visitComparingAnd(TypescriptParser.ComparingAndContext ctx) {
         if (ctx.and() != null) {
-            return ApsOperators.AND;
+            return TypescriptOperators.AND;
         }
 
         if (ctx.breakingAnd() != null) {
-            return ApsOperators.BREAKING_AND;
+            return TypescriptOperators.BREAKING_AND;
         }
 
         return null;
@@ -324,11 +328,11 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
     @Override
     public TypescriptSymbol visitComparingOr(TypescriptParser.ComparingOrContext ctx) {
         if (ctx.or() != null) {
-            return ApsOperators.OR;
+            return TypescriptOperators.OR;
         }
 
         if (ctx.breakingOr() != null) {
-            return ApsOperators.BREAKING_OR;
+            return TypescriptOperators.BREAKING_OR;
         }
 
         return null;
@@ -337,43 +341,43 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
     @Override
     public TypescriptSymbol visitArithmetic(TypescriptParser.ArithmeticContext ctx) {
         if (ctx.Plus() != null) {
-            return ApsOperators.PLUS;
+            return TypescriptOperators.PLUS;
         }
 
         if (ctx.Minus() != null) {
-            return ApsOperators.MINUS;
+            return TypescriptOperators.MINUS;
         }
 
         if (ctx.Multiply() != null) {
-            return ApsOperators.MULTIPLY;
+            return TypescriptOperators.MULTIPLY;
         }
 
         if (ctx.Divide() != null) {
-            return ApsOperators.DIVIDE;
+            return TypescriptOperators.DIVIDE;
         }
 
         if (ctx.Pow() != null) {
-            return ApsOperators.POW;
+            return TypescriptOperators.POW;
         }
 
         if (ctx.AddisionAssignment() != null) {
-            return ApsOperators.ADDITION_ASSIGNMENT;
+            return TypescriptOperators.ADDITION_ASSIGNMENT;
         }
 
         if (ctx.SubtractionAssignment() != null) {
-            return ApsOperators.SUBTRACTION_ASSIGNMENT;
+            return TypescriptOperators.SUBTRACTION_ASSIGNMENT;
         }
 
         if (ctx.MultiplicationAssignment() != null) {
-            return ApsOperators.MULTIPLICATION_ASSIGNMENT;
+            return TypescriptOperators.MULTIPLICATION_ASSIGNMENT;
         }
 
         if (ctx.DivisionAssignment() != null) {
-            return ApsOperators.DIVISION_ASSIGNMENT;
+            return TypescriptOperators.DIVISION_ASSIGNMENT;
         }
 
         if (ctx.PowAssignment() != null) {
-            return ApsOperators.POW_ASSIGNMENT;
+            return TypescriptOperators.POW_ASSIGNMENT;
         }
 
         return null;
@@ -515,13 +519,34 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
     @Override
     public TypescriptCallbackFunction visitCallbackFunction(TypescriptParser.CallbackFunctionContext ctx) {
         TypescriptCallbackFunction function = new TypescriptCallbackFunction(this.current);
-        if (ctx.paramList() != null) {
-            function.params(visitParamList(ctx.paramList()));
+        if (ctx.callbackParamList() != null) {
+            function.params(visitCallbackParamList(ctx.callbackParamList()));
         }
         for (TypescriptParser.TheStatementContext statementContext : ctx.defineStatement().theStatement()) {
             function.addStatement(visitTheStatement(statementContext));
         }
         return function;
+    }
+
+    @Override
+    public TypescriptParamList visitCallbackParamList(TypescriptParser.CallbackParamListContext ctx) {
+        TypescriptParamList params = new TypescriptParamList(this.current);
+        for (TypescriptParser.CallbackParamContext callbackParam : ctx.callbackParam()) {
+            params.addArg(visitCallbackParam(callbackParam));
+        }
+        return params;
+    }
+
+    @Override
+    public TypescriptParamType visitCallbackParam(TypescriptParser.CallbackParamContext ctx) {
+        TypescriptParamType param = new TypescriptParamType(this.current);
+        param.name(ctx.identifier().getText());
+        param.typeRequired(false);
+
+        if (ctx.argType() != null) {
+            param.type(visitArgType(ctx.argType()));
+        }
+        return param;
     }
 
     @Override

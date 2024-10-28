@@ -9,12 +9,13 @@ import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.
 public class TypescriptKotlinCallbackFunctionTranslator extends TypescriptKotlinScriptTranslator<TypescriptCallbackFunction> implements TypescriptCallbackFunctionTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptCallbackFunction ast) {
-        builder.append("{\n");
+        builder.append("{");
 
         if (ast.params() != null && !ast.params().args().isEmpty()) {
             postTranslate(TypescriptTranslateElement.PARAM_LIST, ast.params());
-            builder.append("->\n");
+            builder.append("->");
         }
+        builder.append("\n");
 
         for (TypescriptStatement statement : ast.statements()) {
             postTranslate(TypescriptTranslateElement.STATEMENT, statement);

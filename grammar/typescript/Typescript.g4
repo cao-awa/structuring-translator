@@ -55,7 +55,11 @@ variableSelfIncrement: beforeIncrement? invokeAccess afterIncrement? ;
 beforeIncrement: Increment ;
 afterIncrement: Increment ;
 
-callbackFunction: leftParen paramList? rightParen CallbackAssigment leftBrace defineStatement rightBrace;
+callbackFunction: ( (leftParen callbackParamList? rightParen) | callbackParam ) CallbackAssigment leftBrace defineStatement rightBrace;
+
+callbackParamList: callbackParam ( Comma callbackParam ) *;
+
+callbackParam: identifier ( Colon argType )?;
 
 anonymousObject: leftBrace ( anonymousObjectParamList ) rightBrace ;
 

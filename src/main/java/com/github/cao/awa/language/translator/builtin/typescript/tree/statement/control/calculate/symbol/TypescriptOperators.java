@@ -5,7 +5,7 @@ import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.comparing.*;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.not.TypescriptNotSymbol;
 
-public class ApsOperators {
+public class TypescriptOperators {
     public static final TypescriptNotSymbol NOT = new TypescriptNotSymbol(null);
 
     public static final TypescriptMinusSymbol MINUS = new TypescriptMinusSymbol(null);
@@ -21,6 +21,7 @@ public class ApsOperators {
     public static final TypescriptPowAssignmentSymbol POW_ASSIGNMENT = new TypescriptPowAssignmentSymbol(null);
 
     public static final TypescriptEqualsSymbol EQUALS = new TypescriptEqualsSymbol(null);
+    public static final TypescriptStrictEqualsSymbol STRICT_EQUALS = new TypescriptStrictEqualsSymbol(null);
 
     public static final TypescriptMoreThanSymbol MORE_THAN = new TypescriptMoreThanSymbol(null);
     public static final TypescriptLessThanSymbol LESS_THAN = new TypescriptLessThanSymbol(null);

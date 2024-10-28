@@ -1,6 +1,6 @@
-import { world, system, DimensionLocation } from "@minecraft/server";
+import { world, system } from "@minecraft/server";
 
-function countdown(targetLocation: DimensionLocation) {
+function countdown() {
     const players = world.getPlayers();
 
     players[0].onScreenDisplay.setTitle("Get ready!", {
@@ -21,3 +21,9 @@ function countdown(targetLocation: DimensionLocation) {
         }
     }, 20);
 }
+
+world.beforeEvents.itemUseOn.subscribe((event) => {
+    if (event.itemStack.typeId === "minecraft:stick") {
+        countdown();
+    }
+});

@@ -59,7 +59,7 @@ public interface TypescriptCalculateTranslator extends TypescriptStatementElemen
     default void translateSymbol(LanguageTranslator<TypescriptCalculate> translator) {
         TypescriptSymbol symbol = translator.ast().symbol();
         if (symbol != null) {
-            translator.builder().append(symbol.symbol());
+            translator.postTranslate(TypescriptTranslateElement.SYMBOL, symbol);
         }
     }
 }

@@ -8,6 +8,7 @@ import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
 public class TypescriptParamType extends TypescriptStatement {
     private TypescriptArgType type;
     private String name;
+    private boolean typeRequired = true;
 
     public TypescriptArgType type() {
         return this.type;
@@ -24,6 +25,15 @@ public class TypescriptParamType extends TypescriptStatement {
 
     public TypescriptParamType name(String name) {
         this.name = name;
+        return this;
+    }
+
+    public boolean isTypeRequired() {
+        return this.typeRequired;
+    }
+
+    public TypescriptParamType typeRequired(boolean typeRequired) {
+        this.typeRequired = typeRequired;
         return this;
     }
 

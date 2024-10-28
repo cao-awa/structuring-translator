@@ -8,13 +8,15 @@ import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.
 public class TypescriptKotlinParamTypeTranslator extends TypescriptKotlinScriptTranslator<TypescriptParamType> implements TypescriptParamTypeTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptParamType ast) {
-        builder.append(ast.name())
-                .append(":");
+        builder.append(ast.name());
 
         if (ast.type() != null) {
+            builder.append(":");
             postTranslate(TypescriptTranslateElement.ARG_TYPE, ast.type());
         } else {
-            builder.append("Any");
+            if (ast.isTypeRequired()) {
+                builder.append(":Any");
+            }
         }
     }
 }

@@ -17,6 +17,11 @@ import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.f
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.action.TypescriptKotlinSelfIncrementTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.control.TypescriptKotlinIfTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.control.calculate.TypescriptKotlinCalculateTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.control.calculate.symbol.TypescriptKotlinSymbolTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.control.calculate.symbol.arithmetic.*;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.control.calculate.symbol.assigment.*;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.control.calculate.symbol.comparing.*;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.control.calculate.symbol.not.TypescriptKotlinNotSymbolTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.function.TypescriptKotlinFunctionTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.function.param.TypescriptKotlinParamListTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.function.param.TypescriptKotlinParamTypeTranslator;
@@ -77,7 +82,29 @@ public abstract class TypescriptKotlinScriptTranslator<T extends LanguageAst> ex
         registerKotlinScript(defaultProvider, TypescriptTranslateElement.IF, new TypescriptKotlinIfTranslator());
         registerKotlinScript(defaultProvider, TypescriptTranslateElement.CALCULATE, new TypescriptKotlinCalculateTranslator());
 
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL, new TypescriptKotlinSymbolTranslator<>());
 
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_NOT, new TypescriptKotlinNotSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_AND, new TypescriptKotlinAndSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_BREAKING_AND, new TypescriptKotlinBreakingAndSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_OR, new TypescriptKotlinOrSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_BREAKING_OR, new TypescriptKotlinBreakingOrSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_EQUALS, new TypescriptKotlinEqualsSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_STRICT_EQUALS, new TypescriptKotlinStrictEqualsSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_LESS_THAN, new TypescriptKotlinLessThanSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_MORE_THAN, new TypescriptKotlinMoreThanSymbolTranslator());
+
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_ADDITION_ASSIGMENT, new TypescriptKotlinAdditionAssigmentSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_SUBTRACTION_ASSIGMENT, new TypescriptKotlinSubtractionAssigmentSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_DIVISION_ASSIGMENT, new TypescriptKotlinDivisionAssigmentSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_MULTIPLICATION_ASSIGMENT, new TypescriptKotlinMultiplicationAssigmentSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_POW_ASSIGMENT, new TypescriptKotlinPowAssigmentSymbolTranslator());
+
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_PLUS, new TypescriptKotlinPlusSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_MINUS, new TypescriptKotlinMinusSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_DIVIDE, new TypescriptKotlinDivideSymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_MULTIPLY, new TypescriptKotlinMultiplySymbolTranslator());
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_POW, new TypescriptKotlinPowSymbolTranslator());
     }
 
     @Override

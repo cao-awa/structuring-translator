@@ -127,7 +127,7 @@ moreThan        : RightAngleBracket ;
 comparingAnd : and | breakingAnd ;
 comparingOr  : or  | breakingOr  ;
 
-comparing : ( comparingAnd | comparingOr | moreThan | lessThan | Equals ) ;
+comparing : ( comparingAnd | comparingOr | moreThan | lessThan | Equals | StricEquals ) ;
 
 isDefineField: Var | Let | Const ;
 

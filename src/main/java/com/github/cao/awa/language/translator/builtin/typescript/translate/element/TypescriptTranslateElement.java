@@ -17,6 +17,11 @@ import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action.TypescriptSelfIncrement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.TypescriptIf;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.TypescriptCalculate;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.TypescriptSymbol;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.arithmetic.*;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.assignment.*;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.comparing.*;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.not.TypescriptNotSymbol;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.function.TypescriptFunction;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.function.TypescriptParamList;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.function.TypescriptParamType;
@@ -79,6 +84,27 @@ public class TypescriptTranslateElement {
 
     public static final TranslateElementData<TypescriptIf> IF = create(TypescriptIf.class);
     public static final TranslateElementData<TypescriptCalculate> CALCULATE = create(TypescriptCalculate.class);
+
+    public static final TranslateElementData<TypescriptSymbol> SYMBOL = create(TypescriptSymbol.class);
+    public static final TranslateElementData<TypescriptNotSymbol> SYMBOL_NOT = create(TypescriptNotSymbol.class);
+    public static final TranslateElementData<TypescriptAndSymbol> SYMBOL_AND = create(TypescriptAndSymbol.class);
+    public static final TranslateElementData<TypescriptBreakingAndSymbol> SYMBOL_BREAKING_AND = create(TypescriptBreakingAndSymbol.class);
+    public static final TranslateElementData<TypescriptOrSymbol> SYMBOL_OR = create(TypescriptOrSymbol.class);
+    public static final TranslateElementData<TypescriptBreakingOrSymbol> SYMBOL_BREAKING_OR = create(TypescriptBreakingOrSymbol.class);
+    public static final TranslateElementData<TypescriptEqualsSymbol> SYMBOL_EQUALS = create(TypescriptEqualsSymbol.class);
+    public static final TranslateElementData<TypescriptStrictEqualsSymbol> SYMBOL_STRICT_EQUALS = create(TypescriptStrictEqualsSymbol.class);
+    public static final TranslateElementData<TypescriptLessThanSymbol> SYMBOL_LESS_THAN = create(TypescriptLessThanSymbol.class);
+    public static final TranslateElementData<TypescriptMoreThanSymbol> SYMBOL_MORE_THAN = create(TypescriptMoreThanSymbol.class);
+    public static final TranslateElementData<TypescriptAdditionAssignmentSymbol> SYMBOL_ADDITION_ASSIGMENT = create(TypescriptAdditionAssignmentSymbol.class);
+    public static final TranslateElementData<TypescriptSubtractionAssignmentSymbol> SYMBOL_SUBTRACTION_ASSIGMENT = create(TypescriptSubtractionAssignmentSymbol.class);
+    public static final TranslateElementData<TypescriptDivisionAssignmentSymbol> SYMBOL_DIVISION_ASSIGMENT = create(TypescriptDivisionAssignmentSymbol.class);
+    public static final TranslateElementData<TypescriptMultiplicationAssignmentSymbol> SYMBOL_MULTIPLICATION_ASSIGMENT = create(TypescriptMultiplicationAssignmentSymbol.class);
+    public static final TranslateElementData<TypescriptPowAssignmentSymbol> SYMBOL_POW_ASSIGMENT = create(TypescriptPowAssignmentSymbol.class);
+    public static final TranslateElementData<TypescriptPlusSymbol> SYMBOL_PLUS = create(TypescriptPlusSymbol.class);
+    public static final TranslateElementData<TypescriptMinusSymbol> SYMBOL_MINUS = create(TypescriptMinusSymbol.class);
+    public static final TranslateElementData<TypescriptDivideSymbol> SYMBOL_DIVIDE = create(TypescriptDivideSymbol.class);
+    public static final TranslateElementData<TypescriptMultiplySymbol> SYMBOL_MULTIPLY = create(TypescriptMultiplySymbol.class);
+    public static final TranslateElementData<TypescriptPowSymbol> SYMBOL_POW = create(TypescriptPowSymbol.class);
 
     public static <X extends LanguageAst> TranslateElementData<X> create(Class<X> ast) {
         TranslateElementData<X> elementData = new TranslateElementData<>(ast);

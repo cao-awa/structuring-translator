@@ -2,6 +2,7 @@ package com.github.cao.awa.language.translator.builtin.typescript.visitor;
 
 import com.github.cao.awa.language.translator.builtin.typescript.antlr.TypescriptBaseVisitor;
 import com.github.cao.awa.language.translator.builtin.typescript.antlr.TypescriptParser;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.result.list.TypescriptOfList;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.TypescriptIf;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.TypescriptFile;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.object.anonymous.TypescriptAnonymousObject;
@@ -477,6 +478,10 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
             return visitCalculateStatement(ctx.calculateStatement());
         }
 
+        if (ctx.ofList() != null) {
+            return visitOfList(ctx.ofList());
+        }
+
         // TODO
         return null;
     }
@@ -514,6 +519,15 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
         }
 
         return null;
+    }
+
+    @Override
+    public TypescriptResultStatement visitOfList(TypescriptParser.OfListContext ctx) {
+        TypescriptOfList ofList = new TypescriptOfList(this.current);
+        for (TypescriptParser.ResultPresentingContext resultPresenting : ctx.resultPresenting()) {
+            ofList.addElement(visitResultPresenting(resultPresenting));
+        }
+        return ofList;
     }
 
     @Override

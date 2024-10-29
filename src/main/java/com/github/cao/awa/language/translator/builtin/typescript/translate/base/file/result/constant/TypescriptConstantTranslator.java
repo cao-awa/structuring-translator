@@ -1,4 +1,4 @@
-package com.github.cao.awa.language.translator.builtin.typescript.translate.base.file.constant;
+package com.github.cao.awa.language.translator.builtin.typescript.translate.base.file.result.constant;
 
 import com.github.cao.awa.language.translator.builtin.typescript.translate.base.file.statement.TypescriptStatementElementTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.element.TypescriptTranslateElement;

@@ -10,6 +10,7 @@ import com.github.cao.awa.language.translator.builtin.typescript.tree.result.con
 import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.string.TypescriptString;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.undefined.TypescriptNull;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.undefined.TypescriptUndefined;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.result.list.TypescriptOfList;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.result.ref.TypescriptReference;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action.TypescriptSelfAction;
@@ -85,7 +86,10 @@ public class TypescriptTranslateElement {
     public static final TranslateElementData<TypescriptIf> IF = create(TypescriptIf.class);
     public static final TranslateElementData<TypescriptCalculate> CALCULATE = create(TypescriptCalculate.class);
 
+    public static final TranslateElementData<TypescriptOfList> OF_LIST = create(TypescriptOfList.class);
+
     public static final TranslateElementData<TypescriptSymbol> SYMBOL = create(TypescriptSymbol.class);
+
     public static final TranslateElementData<TypescriptNotSymbol> SYMBOL_NOT = create(TypescriptNotSymbol.class);
     public static final TranslateElementData<TypescriptAndSymbol> SYMBOL_AND = create(TypescriptAndSymbol.class);
     public static final TranslateElementData<TypescriptBreakingAndSymbol> SYMBOL_BREAKING_AND = create(TypescriptBreakingAndSymbol.class);
@@ -95,11 +99,13 @@ public class TypescriptTranslateElement {
     public static final TranslateElementData<TypescriptStrictEqualsSymbol> SYMBOL_STRICT_EQUALS = create(TypescriptStrictEqualsSymbol.class);
     public static final TranslateElementData<TypescriptLessThanSymbol> SYMBOL_LESS_THAN = create(TypescriptLessThanSymbol.class);
     public static final TranslateElementData<TypescriptMoreThanSymbol> SYMBOL_MORE_THAN = create(TypescriptMoreThanSymbol.class);
+
     public static final TranslateElementData<TypescriptAdditionAssignmentSymbol> SYMBOL_ADDITION_ASSIGMENT = create(TypescriptAdditionAssignmentSymbol.class);
     public static final TranslateElementData<TypescriptSubtractionAssignmentSymbol> SYMBOL_SUBTRACTION_ASSIGMENT = create(TypescriptSubtractionAssignmentSymbol.class);
     public static final TranslateElementData<TypescriptDivisionAssignmentSymbol> SYMBOL_DIVISION_ASSIGMENT = create(TypescriptDivisionAssignmentSymbol.class);
     public static final TranslateElementData<TypescriptMultiplicationAssignmentSymbol> SYMBOL_MULTIPLICATION_ASSIGMENT = create(TypescriptMultiplicationAssignmentSymbol.class);
     public static final TranslateElementData<TypescriptPowAssignmentSymbol> SYMBOL_POW_ASSIGMENT = create(TypescriptPowAssignmentSymbol.class);
+
     public static final TranslateElementData<TypescriptPlusSymbol> SYMBOL_PLUS = create(TypescriptPlusSymbol.class);
     public static final TranslateElementData<TypescriptMinusSymbol> SYMBOL_MINUS = create(TypescriptMinusSymbol.class);
     public static final TranslateElementData<TypescriptDivideSymbol> SYMBOL_DIVIDE = create(TypescriptDivideSymbol.class);

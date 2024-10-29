@@ -1,0 +1,1 @@
+package com.github.cao.awa.language.translator.builtin.typescript;

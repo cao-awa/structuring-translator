@@ -2,15 +2,16 @@ package com.github.cao.awa.language.translator.builtin.typescript.translate.kts;
 
 import com.github.cao.awa.language.translator.builtin.typescript.translate.element.TypescriptTranslateElement;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.TypescriptKotlinScriptFileTranslator;
-import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.constant.TypescriptKotlinScriptConstantTranslator;
-import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.constant.bool.TypescriptKotlinScriptBooleanTranslator;
-import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.constant.number.TypescriptKotlinScriptNumberTranslator;
-import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.constant.string.TypescriptKotlinScriptStringTranslator;
-import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.constant.undefined.TypescriptKotlinScriptNullTranslator;
-import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.constant.undefined.TypescriptKotlinScriptUndefinedTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.constant.TypescriptKotlinScriptConstantTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.constant.bool.TypescriptKotlinScriptBooleanTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.constant.number.TypescriptKotlinScriptNumberTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.constant.string.TypescriptKotlinScriptStringTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.constant.undefined.TypescriptKotlinScriptNullTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.constant.undefined.TypescriptKotlinScriptUndefinedTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.object.anonymous.TypescriptKotlinAnonymousObjectParamListTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.object.anonymous.TypescriptKotlinAnonymousObjectTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.object.callback.TypescriptKotlinCallbackFunctionTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.list.TypescriptKotlinOfListTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.TypescriptKotlinScriptStatementTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.action.TypescriptKotlinSelfActionTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.action.TypescriptKotlinSelfDecrementTranslator;
@@ -33,7 +34,7 @@ import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.f
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.invoke.access.TypescriptKotlinInvokeAccessTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.invoke.param.TypescriptKotlinInvokeParamListTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.invoke.param.TypescriptKotlinInvokeParamTranslator;
-import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.referecen.TypescriptKotlinReferenceTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.referecen.TypescriptKotlinReferenceTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.vararg.TypescriptKotlinScriptArgTypeTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.variable.TypescriptKotlinScriptDefineVariableTranslator;
 import com.github.cao.awa.language.translator.translate.LanguageTranslator;
@@ -81,6 +82,8 @@ public abstract class TypescriptKotlinScriptTranslator<T extends LanguageAst> ex
 
         registerKotlinScript(defaultProvider, TypescriptTranslateElement.IF, new TypescriptKotlinIfTranslator());
         registerKotlinScript(defaultProvider, TypescriptTranslateElement.CALCULATE, new TypescriptKotlinCalculateTranslator());
+
+        registerKotlinScript(defaultProvider, TypescriptTranslateElement.OF_LIST, new TypescriptKotlinOfListTranslator());
 
         registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL, new TypescriptKotlinSymbolTranslator<>());
 

@@ -113,6 +113,18 @@ public class TypescriptBaseListener implements TypescriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterOfList(TypescriptParser.OfListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOfList(TypescriptParser.OfListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterIfStatement(TypescriptParser.IfStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}

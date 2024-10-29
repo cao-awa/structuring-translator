@@ -1,6 +1,6 @@
-package com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.constant.undefined;
+package com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.constant.undefined;
 
-import com.github.cao.awa.language.translator.builtin.typescript.translate.base.file.constant.string.TypescriptStringTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.base.file.result.constant.string.TypescriptStringTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.TypescriptKotlinScriptTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.string.TypescriptString;
 

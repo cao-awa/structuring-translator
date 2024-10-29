@@ -1,6 +1,6 @@
-package com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.statement.referecen;
+package com.github.cao.awa.language.translator.builtin.typescript.translate.kts.file.result.referecen;
 
-import com.github.cao.awa.language.translator.builtin.typescript.translate.base.file.statement.referecen.TypescriptReferenceTranslator;
+import com.github.cao.awa.language.translator.builtin.typescript.translate.base.file.result.referecen.TypescriptReferenceTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.TypescriptKotlinScriptTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.result.ref.TypescriptReference;
 

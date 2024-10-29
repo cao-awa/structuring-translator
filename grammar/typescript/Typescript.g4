@@ -16,7 +16,9 @@ defineVariableStatement: isDefineField? variableName ((Colon argType (leftBracke
 
 resultPresenting: constant | identifier | fullName | resultingStatement ;
 
-resultingStatement: invokeStatement | newInstanceStatement | calculateStatement | anonymousObject | callbackFunction | variableSelfAction ;
+resultingStatement: invokeStatement | newInstanceStatement | calculateStatement | anonymousObject | callbackFunction | variableSelfAction | ofList ;
+
+ofList: leftBracket ( Comma? resultPresenting Comma?)* rightBracket ;
 
 ifStatement: If
              leftParen (

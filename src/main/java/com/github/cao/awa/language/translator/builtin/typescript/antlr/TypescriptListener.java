@@ -88,6 +88,16 @@ public interface TypescriptListener extends ParseTreeListener {
 	 */
 	void exitResultingStatement(TypescriptParser.ResultingStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TypescriptParser#ofList}.
+	 * @param ctx the parse tree
+	 */
+	void enterOfList(TypescriptParser.OfListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TypescriptParser#ofList}.
+	 * @param ctx the parse tree
+	 */
+	void exitOfList(TypescriptParser.OfListContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TypescriptParser#ifStatement}.
 	 * @param ctx the parse tree
 	 */

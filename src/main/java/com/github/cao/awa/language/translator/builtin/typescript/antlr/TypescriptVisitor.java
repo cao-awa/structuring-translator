@@ -59,6 +59,12 @@ public interface TypescriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitResultingStatement(TypescriptParser.ResultingStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TypescriptParser#ofList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOfList(TypescriptParser.OfListContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TypescriptParser#ifStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

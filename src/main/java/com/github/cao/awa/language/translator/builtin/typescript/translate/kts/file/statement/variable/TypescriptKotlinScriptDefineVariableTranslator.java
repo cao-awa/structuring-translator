@@ -14,6 +14,7 @@ public class TypescriptKotlinScriptDefineVariableTranslator extends TypescriptKo
             builder.append("var ");
         }
         builder.append(ast.name());
+
 //        if (ast.type() != null) {
 //            builder.append(":");
 //            postTranslate(TypescriptTranslateElement.ARG_TYPE, ast.type());
@@ -22,6 +23,8 @@ public class TypescriptKotlinScriptDefineVariableTranslator extends TypescriptKo
         if (ast.assigment() != null) {
             builder.append("=");
             postTranslate(TypescriptTranslateElement.STATEMENT, ast.assigment());
+        } else {
+            builder.append(":Any?=null");
         }
 
         translateEnding(this);

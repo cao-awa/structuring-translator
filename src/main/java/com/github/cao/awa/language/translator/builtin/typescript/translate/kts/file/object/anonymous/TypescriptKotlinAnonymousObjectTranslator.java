@@ -8,7 +8,7 @@ import com.github.cao.awa.language.translator.builtin.typescript.tree.object.ano
 public class TypescriptKotlinAnonymousObjectTranslator extends TypescriptKotlinScriptTranslator<TypescriptAnonymousObject> implements TypescriptAnonymousObjectTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptAnonymousObject ast) {
-        builder.append("/* NOT IMPLIED: anonymous object\n");
+        builder.append("Any() \n/* NOT IMPLIED: anonymous object\n");
         ast.params().values().forEach((key, value) -> {
             builder.append(key).append(":");
             postTranslate(TypescriptTranslateElement.STATEMENT, value);

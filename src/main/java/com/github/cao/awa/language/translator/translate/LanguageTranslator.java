@@ -12,11 +12,16 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class LanguageTranslator<T extends LanguageAst> implements LanguageElementTranslator<T> {
-    public static final String defaultProvider = "generic";
+    public static final String DEFAULT_PROVIDER = "generic";
+    public static final String VERSION = "1.0.10";
     private static final Map<String, Map<TranslateTarget, Map<TranslateElementData<?>, LanguageTranslator<?>>>> translators = CollectionFactor.hashMap();
     private StringBuilder builder;
     private T ast;
-    private String requiredProvider = defaultProvider;
+    private String requiredProvider = DEFAULT_PROVIDER;
+
+    public static String getVersion() {
+        return VERSION;
+    }
 
     public LanguageTranslator<T> requestProvider(final String provider) {
         this.requiredProvider = provider;
@@ -64,15 +69,15 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
     public static Map<TranslateTarget, Map<TranslateElementData<?>, LanguageTranslator<?>>> getTranslators(String provider) {
         Map<TranslateTarget, Map<TranslateElementData<?>, LanguageTranslator<?>>> ts = translators.get(provider);
         if (ts == null) {
-            ts = translators.get(defaultProvider);
+            ts = translators.get(DEFAULT_PROVIDER);
         }
         return ts;
     }
 
     public static LanguageTranslator<?> getLanguageTranslator(String provider, TranslateTarget target, TranslateElementData<?> element) {
         LanguageTranslator<?> translator = getTranslators(provider).get(target).get(element);
-        if (translator == null && !defaultProvider.equals(provider)) {
-            translator = getLanguageTranslator(defaultProvider, target, element);
+        if (translator == null && !DEFAULT_PROVIDER.equals(provider)) {
+            translator = getLanguageTranslator(DEFAULT_PROVIDER, target, element);
         }
         if (translator != null) {
             translator.requestProvider(provider);
@@ -81,9 +86,9 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
     }
 
     public static LanguageTranslator<?> getLanguageTranslator(TranslateTarget target, TranslateElementData<?> element) {
-        LanguageTranslator<?> translator = getTranslators(defaultProvider).get(target).get(element);
+        LanguageTranslator<?> translator = getTranslators(DEFAULT_PROVIDER).get(target).get(element);
         if (translator == null) {
-            return getLanguageTranslator(defaultProvider, target, element);
+            return getLanguageTranslator(DEFAULT_PROVIDER, target, element);
         }
         return translator;
     }
@@ -96,7 +101,7 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
 
     public static <X extends LanguageAst> String translate(TranslateTarget target, TranslateElementData<X> element, X ast) {
         StringBuilder builder = new StringBuilder();
-        getLanguageTranslator(defaultProvider, target, element).requestProvider(defaultProvider).postTranslate(builder, Manipulate.cast(ast));
+        getLanguageTranslator(DEFAULT_PROVIDER, target, element).requestProvider(DEFAULT_PROVIDER).postTranslate(builder, Manipulate.cast(ast));
         return builder.toString();
     }
 
@@ -143,7 +148,7 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
     }
 
     public static <X extends LanguageAst> LanguageTranslator<X> translator(TranslateTarget target, TranslateElementData<X> element) {
-        return Manipulate.cast(getLanguageTranslator(defaultProvider, target, element));
+        return Manipulate.cast(getLanguageTranslator(DEFAULT_PROVIDER, target, element));
     }
 
     public <X extends LanguageAst> LanguageTranslator<X> translator(String provider, TranslateElementData<X> element) {

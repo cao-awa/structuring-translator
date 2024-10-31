@@ -43,71 +43,71 @@ import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
 
 public abstract class TypescriptKotlinScriptTranslator<T extends LanguageAst> extends LanguageTranslator<T> {
     public static void postRegister() {
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.FILE, new TypescriptKotlinScriptFileTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.STATEMENT, new TypescriptKotlinScriptStatementTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.DEFINE_VARIABLE, new TypescriptKotlinScriptDefineVariableTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.FILE, new TypescriptKotlinScriptFileTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.STATEMENT, new TypescriptKotlinScriptStatementTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.DEFINE_VARIABLE, new TypescriptKotlinScriptDefineVariableTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.CONSTANT, new TypescriptKotlinScriptConstantTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.NUMBER, new TypescriptKotlinScriptNumberTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.STRING, new TypescriptKotlinScriptStringTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.BOOLEAN, new TypescriptKotlinScriptBooleanTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.NULL, new TypescriptKotlinScriptNullTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.UNDEFINED, new TypescriptKotlinScriptUndefinedTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.CONSTANT, new TypescriptKotlinScriptConstantTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.NUMBER, new TypescriptKotlinScriptNumberTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.STRING, new TypescriptKotlinScriptStringTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.BOOLEAN, new TypescriptKotlinScriptBooleanTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.NULL, new TypescriptKotlinScriptNullTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.UNDEFINED, new TypescriptKotlinScriptUndefinedTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.ARG_TYPE, new TypescriptKotlinScriptArgTypeTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.REFERENCE, new TypescriptKotlinReferenceTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.ARG_TYPE, new TypescriptKotlinScriptArgTypeTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.REFERENCE, new TypescriptKotlinReferenceTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.IMPORT, new TypescriptKotlinImportTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.IMPORT, new TypescriptKotlinImportTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.FUNCTION, new TypescriptKotlinFunctionTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.PARAM_LIST, new TypescriptKotlinParamListTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.PARAM_TYPE, new TypescriptKotlinParamTypeTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.FUNCTION, new TypescriptKotlinFunctionTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.PARAM_LIST, new TypescriptKotlinParamListTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.PARAM_TYPE, new TypescriptKotlinParamTypeTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.CALLBACK_FUNCTION, new TypescriptKotlinCallbackFunctionTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.CALLBACK_FUNCTION, new TypescriptKotlinCallbackFunctionTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.INVOKE, new TypescriptKotlinInvokeTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.INVOKE_OBJECT, new TypescriptKotlinInvokeObjectTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.INVOKE_ACCESS, new TypescriptKotlinInvokeAccessTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.INVOKE_ACCESS_ELEMENT, new TypescriptKotlinInvokeAccessElementTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.INVOKE_ACCESS_ARRAY, new TypescriptKotlinInvokeAccessArrayTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.INVOKE_PARAM, new TypescriptKotlinInvokeParamTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.INVOKE_PARAM_LIST, new TypescriptKotlinInvokeParamListTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.INVOKE, new TypescriptKotlinInvokeTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.INVOKE_OBJECT, new TypescriptKotlinInvokeObjectTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.INVOKE_ACCESS, new TypescriptKotlinInvokeAccessTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.INVOKE_ACCESS_ELEMENT, new TypescriptKotlinInvokeAccessElementTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.INVOKE_ACCESS_ARRAY, new TypescriptKotlinInvokeAccessArrayTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.INVOKE_PARAM, new TypescriptKotlinInvokeParamTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.INVOKE_PARAM_LIST, new TypescriptKotlinInvokeParamListTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.ANONYMOUS_OBJECT, new TypescriptKotlinAnonymousObjectTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.ANONYMOUS_OBJECT_PARAM_LIST, new TypescriptKotlinAnonymousObjectParamListTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.ANONYMOUS_OBJECT, new TypescriptKotlinAnonymousObjectTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.ANONYMOUS_OBJECT_PARAM_LIST, new TypescriptKotlinAnonymousObjectParamListTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SELF_ACTION, new TypescriptKotlinSelfActionTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SELF_DECREMENT, new TypescriptKotlinSelfDecrementTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SELF_INCREMENT, new TypescriptKotlinSelfIncrementTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SELF_ACTION, new TypescriptKotlinSelfActionTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SELF_DECREMENT, new TypescriptKotlinSelfDecrementTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SELF_INCREMENT, new TypescriptKotlinSelfIncrementTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.IF, new TypescriptKotlinIfTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.CALCULATE, new TypescriptKotlinCalculateTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.IF, new TypescriptKotlinIfTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.CALCULATE, new TypescriptKotlinCalculateTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.OF_LIST, new TypescriptKotlinOfListTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.OF_LIST, new TypescriptKotlinOfListTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL, new TypescriptKotlinSymbolTranslator<>());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL, new TypescriptKotlinSymbolTranslator<>());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_NOT, new TypescriptKotlinNotSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_AND, new TypescriptKotlinAndSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_BREAKING_AND, new TypescriptKotlinBreakingAndSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_OR, new TypescriptKotlinOrSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_BREAKING_OR, new TypescriptKotlinBreakingOrSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_EQUALS, new TypescriptKotlinEqualsSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_STRICT_EQUALS, new TypescriptKotlinStrictEqualsSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_LESS_THAN, new TypescriptKotlinLessThanSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_MORE_THAN, new TypescriptKotlinMoreThanSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_NOT, new TypescriptKotlinNotSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_AND, new TypescriptKotlinAndSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_BREAKING_AND, new TypescriptKotlinBreakingAndSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_OR, new TypescriptKotlinOrSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_BREAKING_OR, new TypescriptKotlinBreakingOrSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_EQUALS, new TypescriptKotlinEqualsSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_STRICT_EQUALS, new TypescriptKotlinStrictEqualsSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_LESS_THAN, new TypescriptKotlinLessThanSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_MORE_THAN, new TypescriptKotlinMoreThanSymbolTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_ADDITION_ASSIGMENT, new TypescriptKotlinAdditionAssigmentSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_SUBTRACTION_ASSIGMENT, new TypescriptKotlinSubtractionAssigmentSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_DIVISION_ASSIGMENT, new TypescriptKotlinDivisionAssigmentSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_MULTIPLICATION_ASSIGMENT, new TypescriptKotlinMultiplicationAssigmentSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_POW_ASSIGMENT, new TypescriptKotlinPowAssigmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_ADDITION_ASSIGMENT, new TypescriptKotlinAdditionAssigmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_SUBTRACTION_ASSIGMENT, new TypescriptKotlinSubtractionAssigmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_DIVISION_ASSIGMENT, new TypescriptKotlinDivisionAssigmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_MULTIPLICATION_ASSIGMENT, new TypescriptKotlinMultiplicationAssigmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_POW_ASSIGMENT, new TypescriptKotlinPowAssigmentSymbolTranslator());
 
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_PLUS, new TypescriptKotlinPlusSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_MINUS, new TypescriptKotlinMinusSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_DIVIDE, new TypescriptKotlinDivideSymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_MULTIPLY, new TypescriptKotlinMultiplySymbolTranslator());
-        registerKotlinScript(defaultProvider, TypescriptTranslateElement.SYMBOL_POW, new TypescriptKotlinPowSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_PLUS, new TypescriptKotlinPlusSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_MINUS, new TypescriptKotlinMinusSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_DIVIDE, new TypescriptKotlinDivideSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_MULTIPLY, new TypescriptKotlinMultiplySymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_POW, new TypescriptKotlinPowSymbolTranslator());
     }
 
     @Override

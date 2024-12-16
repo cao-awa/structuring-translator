@@ -469,8 +469,10 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<Structuring
 
     @Override
     public StructuringAst visitDefineStatement(TypescriptParser.DefineStatementContext ctx) {
+        TypescriptFile fileAst = (TypescriptFile) this.current;
+
         for (TypescriptParser.TheStatementContext theStatementContext : ctx.theStatement()) {
-            ((TypescriptFile) this.current).addStatement(visitTheStatement(theStatementContext));
+            fileAst.addStatement(visitTheStatement(theStatementContext));
         }
 
         return this.current;

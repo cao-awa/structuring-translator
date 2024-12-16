@@ -15,7 +15,7 @@ public interface TypescriptSymbolTranslator<S extends TypescriptSymbol> extends 
         StringBuilder builder = translator.builder();
 
         translator.translator(TypescriptTranslateElement.byType(ast.getClass()), next -> {
-            next.postTranslate(builder, Manipulate.cast(ast));
+            next.postTranslate(builder, Manipulate.cast(ast), translator);
         });
     }
 }

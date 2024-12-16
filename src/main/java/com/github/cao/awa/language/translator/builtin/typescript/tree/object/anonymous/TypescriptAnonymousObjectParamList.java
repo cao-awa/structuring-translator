@@ -1,7 +1,7 @@
 package com.github.cao.awa.language.translator.builtin.typescript.tree.object.anonymous;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.TypescriptResultStatement;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
 import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;

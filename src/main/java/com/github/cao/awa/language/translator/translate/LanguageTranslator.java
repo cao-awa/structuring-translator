@@ -6,6 +6,8 @@ import com.github.cao.awa.language.translator.translate.lang.element.TranslateEl
 import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
 import com.github.cao.awa.sinuatum.manipulate.Manipulate;
 import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -13,14 +15,40 @@ import java.util.function.Function;
 
 public abstract class LanguageTranslator<T extends LanguageAst> implements LanguageElementTranslator<T> {
     public static final String DEFAULT_PROVIDER = "generic";
-    public static final String VERSION = "1.0.10";
+    public static final String VERSION = "1.0.11";
     private static final Map<String, Map<TranslateTarget, Map<TranslateElementData<?>, LanguageTranslator<?>>>> translators = CollectionFactor.hashMap();
+    public static boolean enableLineWrap = false;
+    public static boolean enableIdent = false;
+    private String requiredProvider = DEFAULT_PROVIDER;
     private StringBuilder builder;
     private T ast;
-    private String requiredProvider = DEFAULT_PROVIDER;
+    @Range(from = 0, to = Integer.MAX_VALUE)
+    private int currentIdent = 0;
+    @Range(from = 0, to = Integer.MAX_VALUE)
+    private int ident = 0;
+    private String identStyle = "    ";
 
     public static String getVersion() {
         return VERSION;
+    }
+
+    public void pushIdent() {
+        this.currentIdent++;
+
+        this.ident = this.currentIdent;
+    }
+
+    public void popIdent() {
+        if (this.currentIdent > 0) {
+            this.currentIdent--;
+        }
+
+        this.ident = this.currentIdent;
+    }
+
+    public LanguageTranslator<T> identStyle(String identStyle) {
+        this.identStyle = identStyle;
+        return this;
     }
 
     public LanguageTranslator<T> requestProvider(final String provider) {
@@ -95,13 +123,15 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
 
     public static <X extends LanguageAst> String translate(String provider, TranslateTarget target, TranslateElementData<X> element, X ast) {
         StringBuilder builder = new StringBuilder();
-        getLanguageTranslator(provider, target, element).requestProvider(provider).postTranslate(builder, Manipulate.cast(ast));
+        LanguageTranslator<?> translator = getLanguageTranslator(provider, target, element);
+        translator.requestProvider(provider).postTranslate(builder, Manipulate.cast(ast), translator);
         return builder.toString();
     }
 
     public static <X extends LanguageAst> String translate(TranslateTarget target, TranslateElementData<X> element, X ast) {
         StringBuilder builder = new StringBuilder();
-        getLanguageTranslator(DEFAULT_PROVIDER, target, element).requestProvider(DEFAULT_PROVIDER).postTranslate(builder, Manipulate.cast(ast));
+        LanguageTranslator<?> translator = getLanguageTranslator(DEFAULT_PROVIDER, target, element);
+        translator.requestProvider(DEFAULT_PROVIDER).postTranslate(builder, Manipulate.cast(ast), translator);
         return builder.toString();
     }
 
@@ -112,35 +142,63 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
     }
 
     @Override
-    public void postTranslate(StringBuilder builder, T ast) {
+    public void postTranslate(StringBuilder builder, T ast, @NotNull LanguageTranslator<?> source) {
         if (ast == null || builder == null) {
             return;
         }
         this.builder = builder;
         this.ast = ast;
-        translate(builder, ast);
+        translate(builder, ast, source);
+        if (source.ident != source.currentIdent) {
+            source.currentIdent = source.ident;
+        }
+    }
+
+    public void postTranslate(StringBuilder builder, T ast, @NotNull LanguageTranslator<?> source, boolean ident) {
+        int currentIdent = source.currentIdent;
+        if (!ident) {
+            source.currentIdent = 0;
+        }
+        postTranslate(builder, ast, source);
+        source.currentIdent = currentIdent;
     }
 
     public String postTranslateToString(T ast) {
         StringBuilder builder = new StringBuilder();
-        postTranslate(builder, ast);
+        postTranslate(builder, ast, this);
         return builder.toString();
     }
 
     public <X extends LanguageAst> void postTranslate(String provider, TranslateElementData<X> element, X ast) {
         T recovery = this.ast;
-        translator(provider, element).postTranslate(this.builder, ast);
+        translator(provider, element).postTranslate(this.builder, ast, this);
         this.ast = recovery;
     }
 
     public <X extends LanguageAst> void postTranslate(TranslateElementData<X> element, X ast) {
         T recovery = this.ast;
-        translator(this.requiredProvider, element).postTranslate(this.builder, ast);
+        translator(this.requiredProvider, element).postTranslate(this.builder, ast, this);
+        this.ast = recovery;
+    }
+
+    public <X extends LanguageAst> void postTranslate(String provider, TranslateElementData<X> element, X ast, boolean ident) {
+        T recovery = this.ast;
+        translator(provider, element).postTranslate(this.builder, ast, this, ident);
+        this.ast = recovery;
+    }
+
+    public <X extends LanguageAst> void postTranslate(TranslateElementData<X> element, X ast, boolean ident) {
+        T recovery = this.ast;
+        translator(this.requiredProvider, element).postTranslate(this.builder, ast, this, ident);
         this.ast = recovery;
     }
 
     public <X extends LanguageAst> void postNextTranslate(TranslateElementData<X> element, Function<T, X> nextAst) {
         postTranslate(element, nextAst.apply(this.ast));
+    }
+
+    public <X extends LanguageAst> void postNextTranslate(TranslateElementData<X> element, Function<T, X> nextAst, boolean ident) {
+        postTranslate(element, nextAst.apply(this.ast), ident);
     }
 
     public static <X extends LanguageAst> LanguageTranslator<X> translator(String provider, TranslateTarget target, TranslateElementData<X> element) {
@@ -170,5 +228,17 @@ public abstract class LanguageTranslator<T extends LanguageAst> implements Langu
         }
         action.accept(translator);
         this.ast = recovery;
+    }
+
+    public void translateIdent() {
+        if (enableIdent) {
+            this.builder.append(String.valueOf(this.identStyle).repeat(this.currentIdent));
+        }
+    }
+
+    public void inheritIdent(@NotNull LanguageTranslator<?> source) {
+        this.currentIdent = source.currentIdent;
+        this.ident = source.ident;
+        this.identStyle = source.identStyle;
     }
 }

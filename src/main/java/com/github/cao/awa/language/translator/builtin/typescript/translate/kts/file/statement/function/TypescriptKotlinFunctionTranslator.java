@@ -5,6 +5,7 @@ import com.github.cao.awa.language.translator.builtin.typescript.translate.eleme
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.TypescriptKotlinScriptTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.function.TypescriptFunction;
+import com.github.cao.awa.language.translator.translate.LanguageTranslator;
 
 public class TypescriptKotlinFunctionTranslator extends TypescriptKotlinScriptTranslator<TypescriptFunction> implements TypescriptFunctionTranslator {
     @Override
@@ -15,10 +16,20 @@ public class TypescriptKotlinFunctionTranslator extends TypescriptKotlinScriptTr
 
         postTranslate(TypescriptTranslateElement.PARAM_LIST, ast.params());
 
-        builder.append("){\n");
+        builder.append("){");
+        translateLineWrap(this);
+
+        pushIdent();
         for (TypescriptStatement statement : ast.statements()) {
             postTranslate(TypescriptTranslateElement.STATEMENT, statement);
+            if (!statement.isEnding()) {
+                translateEnding(this);
+            }
         }
-        builder.append("}\n");
+        popIdent();
+
+        builder.append("}");
+
+        translateEnding(this);
     }
 }

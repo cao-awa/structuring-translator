@@ -13,7 +13,7 @@ public interface TypescriptFileElementTranslator extends LanguageElementTranslat
 
         translator.translator(TypescriptTranslateElement.STATEMENT, next -> {
             for (TypescriptStatement importAst : ast.statements()) {
-                next.postTranslate(builder, importAst);
+                next.postTranslate(builder, importAst, translator);
             }
         });
     }

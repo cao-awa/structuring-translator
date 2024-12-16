@@ -4,6 +4,8 @@ import com.github.cao.awa.language.translator.translate.LanguageTranslator;
 import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
 import com.github.cao.awa.language.translator.translate.tree.modifier.ElementModifier;
 import com.github.cao.awa.language.translator.translate.tree.modifier.ModifierRequiredAst;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -11,7 +13,12 @@ import java.util.function.Predicate;
 
 public interface LanguageElementTranslator<T extends LanguageAst> {
     // Do not impl it at translating instance.
-    void postTranslate(StringBuilder builder, T ast);
+    void postTranslate(StringBuilder builder, T ast, @NotNull LanguageTranslator<?> source);
+
+    // Do not call this at translating instance, call 'postTranslate'.
+    default void translate(StringBuilder builder, T ast, @NotNull LanguageTranslator<?> source) {
+        translate(builder, ast);
+    }
 
     // Do not call this at translating instance, call 'postTranslate'.
     void translate(StringBuilder builder, T ast);
@@ -91,6 +98,12 @@ public interface LanguageElementTranslator<T extends LanguageAst> {
                 translator.append(modifier.literal());
                 translator.append(split);
             }
+        }
+    }
+
+    default void translateLineWrap(LanguageTranslator<T> translator) {
+        if (LanguageTranslator.enableLineWrap) {
+            translator.builder().append("\n");
         }
     }
 }

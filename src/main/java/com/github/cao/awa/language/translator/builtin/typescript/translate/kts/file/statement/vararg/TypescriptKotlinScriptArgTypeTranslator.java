@@ -19,7 +19,7 @@ public class TypescriptKotlinScriptArgTypeTranslator extends TypescriptKotlinScr
                 int edge = size - 1;
                 for (int i = 0; i < size; i++) {
                     TypescriptArgType arg = args.get(i);
-                    next.postTranslate(builder, arg);
+                    next.postTranslate(builder, arg, this);
                     if (i != edge) {
                         builder.append(",");
                     }

@@ -2,30 +2,25 @@ package com.github.cao.awa.language.translator.builtin.typescript.visitor;
 
 import com.github.cao.awa.language.translator.builtin.typescript.antlr.TypescriptBaseVisitor;
 import com.github.cao.awa.language.translator.builtin.typescript.antlr.TypescriptParser;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.list.TypescriptOfList;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.TypescriptIf;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.TypescriptFile;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.object.anonymous.TypescriptAnonymousObject;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.object.anonymous.TypescriptAnonymousObjectParamList;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.object.callback.TypescriptCallbackFunction;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.string.TypescriptString;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action.TypescriptSelfAction;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action.TypescriptSelfDecrement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action.TypescriptSelfIncrement;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.TypescriptIf;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.TypescriptCalculate;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.TypescriptOperators;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.calculate.symbol.TypescriptSymbol;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.loop.TypescriptFor;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.loop.TypescriptLoopControl;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.loop.TypescriptWhile;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.loop.control.TypescriptLoopControlType;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.function.TypescriptFunction;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.function.TypescriptParamList;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.function.TypescriptParamType;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.TypescriptResultStatement;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.TypescriptConstant;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.bool.TypescriptBoolean;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.number.TypescriptNumber;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.undefined.TypescriptNull;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.undefined.TypescriptUndefined;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.ref.TypescriptReference;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.importing.TypescriptImportStatement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.invoke.TypescriptInvoke;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.invoke.TypescriptInvokeObject;
@@ -34,6 +29,16 @@ import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.invoke.access.TypescriptInvokeAccessElement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.invoke.param.TypescriptInvokeParam;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.invoke.param.TypescriptInvokeParamList;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.TypescriptResultStatement;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.TypescriptConstant;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.bool.TypescriptBoolean;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.number.TypescriptNumber;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.string.TypescriptString;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.undefined.TypescriptNull;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.undefined.TypescriptUndefined;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.instance.TypescriptNewInstanceStatement;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.list.TypescriptOfList;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.ref.TypescriptReference;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.vararg.TypescriptArgType;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.variable.TypescriptDefineVariable;
 import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
@@ -113,7 +118,76 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
             return visitIfStatement(ctx.ifStatement());
         }
 
+        if (ctx.forStatement() != null) {
+            return visitForStatement(ctx.forStatement());
+        }
+
+        if (ctx.whileStatement() != null) {
+            return visitWhileStatement(ctx.whileStatement());
+        }
+
+        if (ctx.continueStatement() != null) {
+            return visitContinueStatement(ctx.continueStatement());
+        }
+
+        if (ctx.breakStatement() != null) {
+            return visitBreakStatement(ctx.breakStatement());
+        }
+
         return null;
+    }
+
+    @Override
+    public TypescriptStatement visitForStatement(TypescriptParser.ForStatementContext ctx) {
+        TypescriptFor forStatement = new TypescriptFor(this.current);
+        List<TypescriptParser.TheStatementContext> statements = ctx.defineStatement().theStatement();
+
+        if (ctx.forInit() != null) {
+            forStatement.initStatement(visitTheStatement(ctx.forInit().theStatement()));
+        }
+
+        if (ctx.forCondition() != null) {
+            forStatement.condition(visitCalculateStatement(ctx.forCondition().calculateStatement()));
+        }
+
+        TypescriptParser.ForOpContext forOp = ctx.forOp();
+        if (forOp != null) {
+            if (forOp.calculateStatement() != null) {
+                forStatement.operationStatement(visitCalculateStatement(forOp.calculateStatement()));
+            } else if (forOp.variableSelfAction() != null) {
+                forStatement.operationStatement(visitVariableSelfAction(forOp.variableSelfAction()));
+            }
+        }
+
+        if (!statements.isEmpty()) {
+            for (TypescriptParser.TheStatementContext statement : statements) {
+                forStatement.addStatement(visitTheStatement(statement));
+            }
+        }
+
+        return forStatement;
+    }
+
+    @Override
+    public TypescriptStatement visitWhileStatement(TypescriptParser.WhileStatementContext ctx) {
+        TypescriptWhile whileStatement = new TypescriptWhile(this.current);
+        whileStatement.condition(visitResultPresenting(ctx.resultPresenting()));
+
+        List<TypescriptParser.TheStatementContext> statements = ctx.theStatement();
+        for (TypescriptParser.TheStatementContext statement : statements) {
+            whileStatement.addStatement(visitTheStatement(statement));
+        }
+        return whileStatement;
+    }
+
+    @Override
+    public TypescriptStatement visitContinueStatement(TypescriptParser.ContinueStatementContext ctx) {
+        return new TypescriptLoopControl(this.current, TypescriptLoopControlType.CONTINUE);
+    }
+
+    @Override
+    public TypescriptStatement visitBreakStatement(TypescriptParser.BreakStatementContext ctx) {
+        return new TypescriptLoopControl(this.current, TypescriptLoopControlType.BREAK);
     }
 
     @Override
@@ -420,9 +494,11 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
             }
         }
 
-        TypescriptParser.IsDefineFieldContext defineField = ctx.isDefineField();
+        if (ctx.isDefineField() != null) {
+            TypescriptParser.IsDefineFieldContext defineField = ctx.isDefineField();
 
-        variable.isFinal(defineField.Const() != null);
+            variable.isFinal(defineField.Const() != null);
+        }
 
         return variable;
     }
@@ -480,6 +556,10 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
 
         if (ctx.ofList() != null) {
             return visitOfList(ctx.ofList());
+        }
+
+        if (ctx.newInstanceStatement() != null) {
+            return visitNewInstanceStatement(ctx.newInstanceStatement());
         }
 
         // TODO
@@ -602,6 +682,12 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
             invoke.params(visitInvokeParamList(ctx.invokeParamList()));
         }
 
+        if (!ctx.fluentInvokeStatement().isEmpty()) {
+            for (TypescriptParser.FluentInvokeStatementContext fluentInvokeStatement : ctx.fluentInvokeStatement()) {
+                invoke.addFluentInvoke(visitFluentInvokeStatement(fluentInvokeStatement));
+            }
+        }
+
         return invoke;
     }
 
@@ -647,13 +733,36 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
     }
 
     @Override
-    public LanguageAst visitFluentInvokeStatement(TypescriptParser.FluentInvokeStatementContext ctx) {
-        return null;
+    public TypescriptInvoke visitFluentInvokeStatement(TypescriptParser.FluentInvokeStatementContext ctx) {
+        TypescriptInvoke invoke = new TypescriptInvoke(this.current);
+
+        if (ctx.invokeParamList() != null) {
+            invoke.params(visitInvokeParamList(ctx.invokeParamList()));
+        }
+
+        invoke.invokeTarget(
+                new TypescriptInvokeObject(this.current).addAccess(
+                        new TypescriptInvokeAccessElement(this.current).target(
+                                ctx.identifier().getText()
+                        )
+                )
+        );
+
+        invoke.fluent(true);
+
+        invoke.isEnding(false);
+
+        return invoke;
     }
 
     @Override
-    public TypescriptResultStatement visitNewInstanceStatement(TypescriptParser.NewInstanceStatementContext ctx) {
-        return null;
+    public TypescriptNewInstanceStatement visitNewInstanceStatement(TypescriptParser.NewInstanceStatementContext ctx) {
+        TypescriptNewInstanceStatement newInstanceStatement = new TypescriptNewInstanceStatement(this.current);
+        newInstanceStatement.type(visitArgType(ctx.argType()));
+        if (ctx.invokeParamList() != null) {
+            newInstanceStatement.paramList(visitInvokeParamList(ctx.invokeParamList()));
+        }
+        return newInstanceStatement;
     }
 
     @Override
@@ -743,7 +852,16 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
     }
 
     @Override
-    public LanguageAst visitValidToken(TypescriptParser.ValidTokenContext ctx) {
+    public TypescriptResultStatement visitValidToken(TypescriptParser.ValidTokenContext ctx) {
+        if (ctx.constant() != null) {
+            return visitConstant(ctx.constant());
+        }
+
+        if (ctx.identifier() != null) {
+            TypescriptReference reference = new TypescriptReference(this.current);
+            reference.name(ctx.identifier().getText());
+            return reference;
+        }
         return null;
     }
 
@@ -773,7 +891,7 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<LanguageAst
         if (ctx.resultPresenting() != null) {
             param.result(visitResultPresenting(ctx.resultPresenting()));
         } else if (ctx.validToken() != null) {
-            param.reference(ctx.validToken().getText());
+            param.result(visitValidToken(ctx.validToken()));
         }
 
         return param;

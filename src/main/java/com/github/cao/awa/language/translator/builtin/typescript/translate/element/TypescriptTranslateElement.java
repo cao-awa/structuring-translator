@@ -4,14 +4,18 @@ import com.github.cao.awa.language.translator.builtin.typescript.tree.Typescript
 import com.github.cao.awa.language.translator.builtin.typescript.tree.object.anonymous.TypescriptAnonymousObject;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.object.anonymous.TypescriptAnonymousObjectParamList;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.object.callback.TypescriptCallbackFunction;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.TypescriptConstant;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.bool.TypescriptBoolean;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.number.TypescriptNumber;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.string.TypescriptString;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.undefined.TypescriptNull;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.constant.undefined.TypescriptUndefined;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.list.TypescriptOfList;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.ref.TypescriptReference;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.loop.TypescriptFor;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.loop.TypescriptLoopControl;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.control.loop.TypescriptWhile;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.TypescriptConstant;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.bool.TypescriptBoolean;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.number.TypescriptNumber;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.string.TypescriptString;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.undefined.TypescriptNull;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.constant.undefined.TypescriptUndefined;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.instance.TypescriptNewInstanceStatement;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.list.TypescriptOfList;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.ref.TypescriptReference;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action.TypescriptSelfAction;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action.TypescriptSelfDecrement;
@@ -71,6 +75,7 @@ public class TypescriptTranslateElement {
     public static final TranslateElementData<TypescriptInvoke> INVOKE = create(TypescriptInvoke.class);
     public static final TranslateElementData<TypescriptInvokeObject> INVOKE_OBJECT = create(TypescriptInvokeObject.class);
     public static final TranslateElementData<TypescriptInvokeAccess> INVOKE_ACCESS = create(TypescriptInvokeAccess.class);
+    public static final TranslateElementData<TypescriptNewInstanceStatement> NEW_INSTANCE = create(TypescriptNewInstanceStatement.class);
     public static final TranslateElementData<TypescriptInvokeAccessElement> INVOKE_ACCESS_ELEMENT = create(TypescriptInvokeAccessElement.class);
     public static final TranslateElementData<TypescriptInvokeAccessArray> INVOKE_ACCESS_ARRAY = create(TypescriptInvokeAccessArray.class);
     public static final TranslateElementData<TypescriptInvokeParam> INVOKE_PARAM = create(TypescriptInvokeParam.class);
@@ -84,6 +89,9 @@ public class TypescriptTranslateElement {
     public static final TranslateElementData<TypescriptSelfIncrement> SELF_INCREMENT = create(TypescriptSelfIncrement.class);
 
     public static final TranslateElementData<TypescriptIf> IF = create(TypescriptIf.class);
+    public static final TranslateElementData<TypescriptFor> FOR = create(TypescriptFor.class);
+    public static final TranslateElementData<TypescriptWhile> WHILE = create(TypescriptWhile.class);
+    public static final TranslateElementData<TypescriptLoopControl> LOOP_CONTROL = create(TypescriptLoopControl.class);
     public static final TranslateElementData<TypescriptCalculate> CALCULATE = create(TypescriptCalculate.class);
 
     public static final TranslateElementData<TypescriptOfList> OF_LIST = create(TypescriptOfList.class);

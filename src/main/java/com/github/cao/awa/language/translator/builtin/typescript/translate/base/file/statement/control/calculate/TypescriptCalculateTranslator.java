@@ -50,7 +50,7 @@ public interface TypescriptCalculateTranslator extends TypescriptStatementElemen
         translator.translator(TypescriptTranslateElement.CALCULATE, next -> {
             if (translator.ast().rights() != null) {
                 for (TypescriptCalculate right : translator.ast().rights()) {
-                    next.postTranslate(translator.builder(), right);
+                    next.postTranslate(translator.builder(), right, translator);
                 }
             }
         });

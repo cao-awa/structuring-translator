@@ -64,12 +64,16 @@ False: 'false' ;
 Function: 'function' ;
 
 // Control statement.
-Import: 'import' ;
-From  : 'from' ;
-New   : 'new'    ;
-If    : 'if'     ;
-Else  : 'else'   ;
-Return: 'return' ;
+Import  : 'import'   ;
+From    : 'from'     ;
+New     : 'new'      ;
+If      : 'if'       ;
+Else    : 'else'     ;
+Return  : 'return'   ;
+For     : 'for'      ;
+While   : 'while'    ;
+Break   : 'break'    ;
+Continue: 'continue' ;
 
 // Connect sign(s).
 AndSign : '&'     ;

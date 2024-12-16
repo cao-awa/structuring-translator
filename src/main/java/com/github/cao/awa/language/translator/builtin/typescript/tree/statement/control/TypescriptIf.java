@@ -2,7 +2,7 @@ package com.github.cao.awa.language.translator.builtin.typescript.tree.statement
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.TypescriptResultStatement;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
 import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
@@ -65,7 +65,7 @@ public class TypescriptIf extends TypescriptResultStatement {
             json.put("predicate", thePredicate);
         }
 
-        if (this.statements != null) {
+        if (!this.statements.isEmpty()) {
             JSONArray statements = new JSONArray();
             for (TypescriptStatement statement : this.statements) {
                 JSONObject theStatement = new JSONObject();
@@ -81,7 +81,7 @@ public class TypescriptIf extends TypescriptResultStatement {
             json.put("else_if", theElse);
         }
 
-        if (this.elseStatements != null) {
+        if (!this.elseStatements.isEmpty()) {
             JSONArray elseStatements = new JSONArray();
             for (TypescriptStatement statement : this.elseStatements) {
                 JSONObject theElse = new JSONObject();

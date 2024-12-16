@@ -6,7 +6,7 @@ program: defineStatement ;
 
 defineStatement: ( theStatement+ )? ;
 
-theStatement: ( ( importStatement | defineVariableStatement | invokeStatement | variableSelfAction ) isEndingLine ) | ( defineFunction | ifStatement );
+theStatement: ( ( importStatement | defineVariableStatement | invokeStatement | variableSelfAction ) isEndingLine ) | ( defineFunction | ifStatement ) | ( forStatement | whileStatement | continueStatement | breakStatement );
 
 importStatement: Import leftBrace identifier ((Comma identifier)+)? rightBrace From String;
 
@@ -19,6 +19,20 @@ resultPresenting: constant | identifier | fullName | resultingStatement ;
 resultingStatement: invokeStatement | newInstanceStatement | calculateStatement | anonymousObject | callbackFunction | variableSelfAction | ofList ;
 
 ofList: leftBracket ( Comma? resultPresenting Comma?)* rightBracket ;
+
+breakStatement: Break Semicolon;
+
+continueStatement: Continue Semicolon;
+
+whileStatement: While leftParen resultPresenting rightParen leftBrace (theStatement+ )? rightBrace;
+
+forStatement: For leftParen forInit? forCondition? Semicolon forOp? rightParen leftBrace defineStatement rightBrace;
+
+forInit: theStatement ;
+
+forCondition: calculateStatement ;
+
+forOp: variableSelfAction | calculateStatement ;
 
 ifStatement: If
              leftParen (
@@ -98,7 +112,7 @@ accessArray: ( accessElement leftBracket resultPresenting rightBracket ) ;
 
 fluentInvokeStatement: point identifier leftParen invokeParamList? rightParen ;
 
-newInstanceStatement: New identifier leftParen invokeParamList? rightParen ;
+newInstanceStatement: New argType leftParen invokeParamList? rightParen ;
 
 variableName: identifier | fullName ;
 

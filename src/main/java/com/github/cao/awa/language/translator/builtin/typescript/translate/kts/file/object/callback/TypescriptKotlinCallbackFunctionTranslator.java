@@ -5,10 +5,19 @@ import com.github.cao.awa.language.translator.builtin.typescript.translate.eleme
 import com.github.cao.awa.language.translator.builtin.typescript.translate.kts.TypescriptKotlinScriptTranslator;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.object.callback.TypescriptCallbackFunction;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.TypescriptStatement;
+import com.github.cao.awa.language.translator.translate.LanguageTranslator;
+import org.jetbrains.annotations.NotNull;
 
 public class TypescriptKotlinCallbackFunctionTranslator extends TypescriptKotlinScriptTranslator<TypescriptCallbackFunction> implements TypescriptCallbackFunctionTranslator {
     @Override
+    public void translate(StringBuilder builder, TypescriptCallbackFunction ast, @NotNull LanguageTranslator<?> source) {
+        inheritIdent(source);
+        translate(builder, ast);
+    }
+
+    @Override
     public void translate(StringBuilder builder, TypescriptCallbackFunction ast) {
+        translateIdent();
         builder.append("{");
 
         if (ast.params() != null && !ast.params().args().isEmpty()) {
@@ -17,10 +26,19 @@ public class TypescriptKotlinCallbackFunctionTranslator extends TypescriptKotlin
         }
         builder.append("\n");
 
+        pushIdent();
         for (TypescriptStatement statement : ast.statements()) {
+            pushIdent();
             postTranslate(TypescriptTranslateElement.STATEMENT, statement);
+            if (!statement.isEnding()) {
+                translateEnding(this);
+            }
+            popIdent();
         }
 
-        builder.append("\n}");
+        translateIdent();
+        popIdent();
+
+        builder.append("}");
     }
 }

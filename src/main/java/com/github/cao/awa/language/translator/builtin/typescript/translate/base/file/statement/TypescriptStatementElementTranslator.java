@@ -12,11 +12,13 @@ public interface TypescriptStatementElementTranslator<T extends TypescriptStatem
         StringBuilder builder = translator.builder();
 
         translator.translator(TypescriptTranslateElement.byType(ast.getClass()), next -> {
-            next.postTranslate(builder, Manipulate.cast(ast));
+            next.postTranslate(builder, Manipulate.cast(ast), translator);
         });
     }
 
     default void translateEnding(LanguageTranslator<T> translator) {
-        translator.builder().append(";\n");
+        translator.builder().append(";");
+
+        translateLineWrap(translator);
     }
 }

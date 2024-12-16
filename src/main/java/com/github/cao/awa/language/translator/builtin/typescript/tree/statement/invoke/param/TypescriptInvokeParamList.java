@@ -20,6 +20,10 @@ public class TypescriptInvokeParamList extends TypescriptStatement {
         return this.params;
     }
 
+    public int size() {
+        return this.params.size();
+    }
+
     public TypescriptInvokeParamList(LanguageAst parent) {
         super(parent);
     }
@@ -31,16 +35,16 @@ public class TypescriptInvokeParamList extends TypescriptStatement {
 
     @Override
     public void preprocess() {
-
+        this.params.forEach(LanguageAst::preprocess);
     }
 
     @Override
     public void postprocess() {
-
+        this.params.forEach(LanguageAst::postprocess);
     }
 
     @Override
     public void consequence() {
-
+        this.params.forEach(LanguageAst::consequence);
     }
 }

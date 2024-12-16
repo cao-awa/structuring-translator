@@ -1,6 +1,6 @@
 package com.github.cao.awa.language.translator.builtin.typescript.tree.statement.action;
 
-import com.github.cao.awa.language.translator.builtin.typescript.tree.result.TypescriptResultStatement;
+import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.language.translator.builtin.typescript.tree.statement.invoke.access.TypescriptInvokeAccess;
 import com.github.cao.awa.language.translator.translate.tree.LanguageAst;
 

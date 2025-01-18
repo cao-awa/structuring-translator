@@ -1,11 +1,11 @@
 package com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.variable;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.github.cao.awa.sinuatum.manipulate.Manipulate;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.vararg.TypescriptArgType;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.manipulate.QuickManipulate;
 
 public class TypescriptDefineVariable extends TypescriptStatement {
     private TypescriptArgType type;
@@ -79,19 +79,19 @@ public class TypescriptDefineVariable extends TypescriptStatement {
 
     @Override
     public void preprocess() {
-        QuickManipulate.notNull(this.type, TypescriptArgType::preprocess);
-        QuickManipulate.notNull(this.assigment, TypescriptResultStatement::preprocess);
+        Manipulate.makeNonNull(this.type, TypescriptArgType::preprocess);
+        Manipulate.makeNonNull(this.assigment, TypescriptResultStatement::preprocess);
     }
 
     @Override
     public void postprocess() {
-        QuickManipulate.notNull(this.type, TypescriptArgType::postprocess);
-        QuickManipulate.notNull(this.assigment, TypescriptResultStatement::postprocess);
+        Manipulate.makeNonNull(this.type, TypescriptArgType::postprocess);
+        Manipulate.makeNonNull(this.assigment, TypescriptResultStatement::postprocess);
     }
 
     @Override
     public void consequence() {
-        QuickManipulate.notNull(this.type, TypescriptArgType::consequence);
-        QuickManipulate.notNull(this.assigment, TypescriptResultStatement::consequence);
+        Manipulate.makeNonNull(this.type, TypescriptArgType::consequence);
+        Manipulate.makeNonNull(this.assigment, TypescriptResultStatement::consequence);
     }
 }

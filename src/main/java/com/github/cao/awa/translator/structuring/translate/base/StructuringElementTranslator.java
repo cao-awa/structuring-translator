@@ -101,7 +101,7 @@ public interface StructuringElementTranslator<T extends StructuringAst> {
     }
 
     default void translateLineWrap(StructuringTranslator<T> translator) {
-        if (StructuringTranslator.enableLineWrap) {
+        if (StructuringTranslator.isEnableLineWrap()) {
             translator.builder().append("\n");
         }
     }

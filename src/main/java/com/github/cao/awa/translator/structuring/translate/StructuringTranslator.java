@@ -6,6 +6,7 @@ import com.github.cao.awa.translator.structuring.translate.element.TranslateElem
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
 import com.github.cao.awa.sinuatum.manipulate.Manipulate;
 import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
@@ -17,8 +18,8 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
     public static final String DEFAULT_PROVIDER = "generic";
     public static final String VERSION = "1.1.0-fix2";
     private static final Map<String, Map<LanguageTranslateTarget, Map<TranslateElementData<?>, StructuringTranslator<?>>>> translators = CollectionFactor.hashMap();
-    public static boolean enableLineWrap = false;
-    public static boolean enableIdent = false;
+    private static boolean enableLineWrap = true;
+    private static boolean enableIdent = true;
     private String requiredProvider = DEFAULT_PROVIDER;
     private StringBuilder builder;
     private T ast;
@@ -28,8 +29,28 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
     private int ident = 0;
     private String identStyle = "    ";
 
+    @Contract(pure = true)
     public static String getVersion() {
         return VERSION;
+    }
+
+    public static void enableIdent(boolean enableIdent) {
+        StructuringTranslator.enableIdent = enableIdent;
+        enableLineWrap(true);
+    }
+
+    @Contract(pure = true)
+    public static boolean isEnableIdent() {
+        return enableIdent;
+    }
+
+    public static void enableLineWrap(boolean enableLineWrap) {
+        StructuringTranslator.enableLineWrap = enableLineWrap;
+    }
+
+    @Contract(pure = true)
+    public static boolean isEnableLineWrap() {
+        return enableLineWrap;
     }
 
     public void pushIdent() {

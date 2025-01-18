@@ -67,7 +67,7 @@ dependencies {
 
     shadow 'org.jetbrains:annotations:24.1.0'
 
-    shadow 'com.github.cao.awa:sinuatum:1.0.11'
+    implementation 'com.github.cao.awa:sinuatum:1.0.15'
 }
 
 test {
@@ -108,3 +108,14 @@ jar {
         )
     }
 }
+
+//compileKotlin {
+//    kotlinOptions {
+//        jvmTarget = '21'
+//    }
+//}
+//compileTestKotlin {
+//    kotlinOptions {
+//        jvmTarget = '21'
+//    }
+//}

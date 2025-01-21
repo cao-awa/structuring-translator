@@ -63,7 +63,8 @@ dependencies {
 
     implementation 'com.alibaba.fastjson2:fastjson2:2.0.50'
 
-    shadow 'org.antlr:antlr4:4.13.2'
+    implementation 'org.antlr:antlr4:4.13.2'
+    shadow 'org.antlr:antlr4-runtime:4.13.2'
 
     shadow 'org.jetbrains:annotations:24.1.0'
 

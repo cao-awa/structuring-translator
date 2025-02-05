@@ -56,7 +56,5 @@ public class TypescriptKotlinIfTranslator extends TypescriptKotlinScriptTranslat
         if (ast.elseIfStatement() != null) {
             postTranslate(TypescriptTranslateElement.IF, ast.elseIfStatement());
         }
-
-        translateEnding(this);
     }
 }

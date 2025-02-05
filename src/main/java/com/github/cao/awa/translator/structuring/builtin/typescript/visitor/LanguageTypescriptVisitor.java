@@ -649,7 +649,9 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<Structuring
     public TypescriptAnonymousObject visitAnonymousObject(TypescriptParser.AnonymousObjectContext ctx) {
         TypescriptAnonymousObject object = new TypescriptAnonymousObject(this.current);
 
-        object.params(visitAnonymousObjectParamList(ctx.anonymousObjectParamList()));
+        if (ctx.anonymousObjectParamList() != null) {
+            object.params(visitAnonymousObjectParamList(ctx.anonymousObjectParamList()));
+        }
 
         return object;
     }
@@ -658,8 +660,10 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<Structuring
     public TypescriptAnonymousObjectParamList visitAnonymousObjectParamList(TypescriptParser.AnonymousObjectParamListContext ctx) {
         TypescriptAnonymousObjectParamList params = new TypescriptAnonymousObjectParamList(this.current);
 
+        if (ctx.anonymousObjectParam() != null) {
         for (TypescriptParser.AnonymousObjectParamContext objectParams : ctx.anonymousObjectParam()) {
             params.addValue(objectParams.identifier().getText(), visitResultPresenting(objectParams.resultPresenting()));
+        }
         }
 
         return params;

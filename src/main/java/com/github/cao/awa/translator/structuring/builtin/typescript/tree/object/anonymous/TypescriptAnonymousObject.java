@@ -5,7 +5,7 @@ import com.github.cao.awa.translator.structuring.builtin.typescript.tree.stateme
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
 
 public class TypescriptAnonymousObject extends TypescriptResultStatement {
-    private TypescriptAnonymousObjectParamList params;
+    private TypescriptAnonymousObjectParamList params = new TypescriptAnonymousObjectParamList(this);
 
     public TypescriptAnonymousObject params(TypescriptAnonymousObjectParamList params) {
         this.params = params;

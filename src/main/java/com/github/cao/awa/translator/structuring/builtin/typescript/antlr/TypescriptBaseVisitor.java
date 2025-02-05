@@ -1,4 +1,4 @@
-// Generated from D:/Codes/Java/language-translator/grammar/typescript/Typescript.g4 by ANTLR 4.13.1
+// Generated from D:/Codes/Java/structuring-translator/grammar/typescript/Typescript.g4 by ANTLR 4.13.2
 package com.github.cao.awa.translator.structuring.builtin.typescript.antlr;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

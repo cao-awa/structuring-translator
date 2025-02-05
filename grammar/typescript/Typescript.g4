@@ -77,7 +77,7 @@ callbackParamList: callbackParam ( Comma callbackParam ) *;
 
 callbackParam: identifier ( Colon argType )?;
 
-anonymousObject: leftBrace ( anonymousObjectParamList ) rightBrace ;
+anonymousObject: leftBrace anonymousObjectParamList? rightBrace ;
 
 anonymousObjectParamList: anonymousObjectParam + ;
 

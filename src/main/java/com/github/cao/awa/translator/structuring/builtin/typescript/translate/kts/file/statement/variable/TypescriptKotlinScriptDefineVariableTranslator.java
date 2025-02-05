@@ -26,7 +26,5 @@ public class TypescriptKotlinScriptDefineVariableTranslator extends TypescriptKo
         } else {
             builder.append(":Any?=null");
         }
-
-        translateEnding(this);
     }
 }

@@ -15,7 +15,7 @@ function countdown() {
     const intervalId = system.runInterval(() => {
         countdown--;
         players[0].onScreenDisplay.updateSubtitle(countdown.toString());
-        players[0].onScreenDisplay.setActionBar("awa" + countdown.toString());
+        players[0].onScreenDisplay.setActionBar(countdown.toString());
 
         if (countdown == 0) {
             system.clearRun(intervalId);

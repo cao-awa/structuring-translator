@@ -468,6 +468,16 @@ public interface TypescriptListener extends ParseTreeListener {
 	 */
 	void exitAccessArray(TypescriptParser.AccessArrayContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link TypescriptParser#fluentAccessArray}.
+	 * @param ctx the parse tree
+	 */
+	void enterFluentAccessArray(TypescriptParser.FluentAccessArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TypescriptParser#fluentAccessArray}.
+	 * @param ctx the parse tree
+	 */
+	void exitFluentAccessArray(TypescriptParser.FluentAccessArrayContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TypescriptParser#fluentInvokeStatement}.
 	 * @param ctx the parse tree
 	 */

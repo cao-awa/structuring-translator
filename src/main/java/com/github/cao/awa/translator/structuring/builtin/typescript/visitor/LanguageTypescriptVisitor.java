@@ -694,6 +694,10 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<Structuring
             }
         }
 
+        if (ctx.fluentAccessArray() != null) {
+            invoke.fluentAccessArray(visitResultPresenting(ctx.fluentAccessArray().resultPresenting()));
+        }
+
         return invoke;
     }
 

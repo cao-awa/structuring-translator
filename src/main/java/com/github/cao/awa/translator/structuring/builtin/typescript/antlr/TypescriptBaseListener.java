@@ -569,6 +569,18 @@ public class TypescriptBaseListener implements TypescriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFluentAccessArray(TypescriptParser.FluentAccessArrayContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFluentAccessArray(TypescriptParser.FluentAccessArrayContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFluentInvokeStatement(TypescriptParser.FluentInvokeStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}

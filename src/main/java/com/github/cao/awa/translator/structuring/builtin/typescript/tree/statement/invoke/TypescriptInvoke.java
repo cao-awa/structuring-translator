@@ -15,6 +15,7 @@ public class TypescriptInvoke extends TypescriptResultStatement {
     private TypescriptInvokeObject invokeTarget;
     private final List<TypescriptInvoke> fluentInvokes = CollectionFactor.arrayList();
     private boolean isFluent = false;
+    private TypescriptResultStatement fluentAccessArray;
 
     public TypescriptInvoke invokeTarget(TypescriptInvokeObject invokeTarget) {
         this.invokeTarget = invokeTarget;
@@ -28,6 +29,15 @@ public class TypescriptInvoke extends TypescriptResultStatement {
     public TypescriptInvoke addFluentInvoke(TypescriptInvoke fluentInvoke) {
         this.fluentInvokes.add(fluentInvoke);
         return this;
+    }
+
+    public TypescriptInvoke fluentAccessArray(TypescriptResultStatement resultStatement) {
+        this.fluentAccessArray = resultStatement;
+        return this;
+    }
+
+    public TypescriptResultStatement fluentAccessArray() {
+        return this.fluentAccessArray;
     }
 
     public boolean fluent() {
@@ -88,6 +98,12 @@ public class TypescriptInvoke extends TypescriptResultStatement {
             }
 
             json.put("fluent_invokes", theFluents);
+        }
+
+        if (this.fluentAccessArray != null) {
+            JSONObject theFluent = new JSONObject();
+            this.fluentAccessArray.generateStructure(theFluent);
+            json.put("fluent_access_array", theFluent);
         }
     }
 

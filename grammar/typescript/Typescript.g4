@@ -100,7 +100,7 @@ extraCalculateStatement: operator calculatableResultPresenting ;
 returnStatement: Return resultPresenting ;
 
 // xxx(param?)
-invokeStatement: invokeObject leftParen invokeParamList? rightParen fluentInvokeStatement*;
+invokeStatement: invokeObject leftParen invokeParamList? rightParen ( fluentAccessArray? ) fluentInvokeStatement*;
 
 invokeObject: invokeAccess + ;
 
@@ -108,7 +108,9 @@ invokeAccess: ( accessArray | accessElement ) ;
 
 accessElement: ( Point? fullNameOrIdentifier ) ;
 
-accessArray: ( accessElement leftBracket resultPresenting rightBracket ) ;
+accessArray: accessElement leftBracket resultPresenting rightBracket ;
+
+fluentAccessArray: leftBracket resultPresenting rightBracket ;
 
 fluentInvokeStatement: point identifier leftParen invokeParamList? rightParen ;
 

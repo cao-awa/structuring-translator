@@ -287,6 +287,12 @@ public interface TypescriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAccessArray(TypescriptParser.AccessArrayContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link TypescriptParser#fluentAccessArray}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFluentAccessArray(TypescriptParser.FluentAccessArrayContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link TypescriptParser#fluentInvokeStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

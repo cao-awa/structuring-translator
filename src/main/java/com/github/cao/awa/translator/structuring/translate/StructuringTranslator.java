@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 public abstract class StructuringTranslator<T extends StructuringAst> implements StructuringElementTranslator<T> {
     public static final String DEFAULT_PROVIDER = "generic";
-    public static final String VERSION = "1.1.3";
+    public static final String VERSION = "1.1.4";
     private static final Map<String, Map<LanguageTranslateTarget, Map<TranslateElementData<?>, StructuringTranslator<?>>>> translators = CollectionFactor.hashMap();
     private static boolean enableLineWrap = true;
     private static boolean enableIdent = true;

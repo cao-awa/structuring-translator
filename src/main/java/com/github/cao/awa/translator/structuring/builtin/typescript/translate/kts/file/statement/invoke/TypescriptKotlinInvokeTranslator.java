@@ -39,6 +39,12 @@ public class TypescriptKotlinInvokeTranslator extends TypescriptKotlinScriptTran
 
         builder.append(")");
 
+        if (ast.fluentAccessArray() != null) {
+            builder.append("[");
+            postTranslate(TypescriptTranslateElement.STATEMENT, ast.fluentAccessArray());
+            builder.append("]");
+        }
+
         for (TypescriptInvoke invoke : ast.fluentInvokes()) {
             postTranslate(TypescriptTranslateElement.INVOKE, invoke);
         }

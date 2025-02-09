@@ -500,6 +500,8 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<Structuring
             TypescriptParser.IsDefineFieldContext defineField = ctx.isDefineField();
 
             variable.isFinal(defineField.Const() != null);
+
+            variable.isDefine(true);
         }
 
         return variable;

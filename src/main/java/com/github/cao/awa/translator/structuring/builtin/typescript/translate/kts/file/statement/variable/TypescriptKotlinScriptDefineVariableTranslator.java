@@ -8,10 +8,12 @@ import com.github.cao.awa.translator.structuring.builtin.typescript.tree.stateme
 public class TypescriptKotlinScriptDefineVariableTranslator extends TypescriptKotlinScriptTranslator<TypescriptDefineVariable> implements TypescriptDefineVariableTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptDefineVariable ast) {
-        if (ast.isFinal()) {
-            builder.append("val ");
-        } else {
-            builder.append("var ");
+        if (ast.isDefine()) {
+            if (ast.isFinal()) {
+                builder.append("val ");
+            } else {
+                builder.append("var ");
+            }
         }
         builder.append(ast.name());
 

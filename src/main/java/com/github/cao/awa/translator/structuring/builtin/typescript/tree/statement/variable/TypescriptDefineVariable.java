@@ -12,6 +12,7 @@ public class TypescriptDefineVariable extends TypescriptStatement {
     private String name;
     private TypescriptResultStatement assigment;
     private boolean isFinal;
+    private boolean isDefine;
 
     public TypescriptDefineVariable name(String name) {
         this.name = name;
@@ -47,6 +48,15 @@ public class TypescriptDefineVariable extends TypescriptStatement {
 
     public boolean isFinal() {
         return this.isFinal;
+    }
+
+    public TypescriptDefineVariable isDefine(boolean isDefine) {
+        this.isDefine = isDefine;
+        return this;
+    }
+
+    public boolean isDefine() {
+        return this.isDefine;
     }
 
     public void assigment(TypescriptResultStatement assigment) {

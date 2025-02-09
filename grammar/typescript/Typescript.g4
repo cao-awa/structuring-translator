@@ -12,7 +12,7 @@ importStatement: Import leftBrace identifier ((Comma identifier)+)? rightBrace F
 
 defineFunction: Function identifier leftParen paramList? rightParen (Colon argType)? leftBrace defineStatement rightBrace ;
 
-defineVariableStatement: isDefineField? variableName ((Colon argType (leftBracket rightBracket)?)? (assignment ( resultPresenting | assignmentIdentifier ))?)? ;
+defineVariableStatement: isDefineField? variableName ( (Colon argType (leftBracket rightBracket)? )? (assignment ( resultPresenting | assignmentIdentifier ))? )? ;
 
 resultPresenting: constant | identifier | fullName | resultingStatement ;
 

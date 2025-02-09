@@ -14,6 +14,7 @@ public interface TypescriptFileElementTranslator extends StructuringElementTrans
         translator.translator(TypescriptTranslateElement.STATEMENT, next -> {
             for (TypescriptStatement importAst : ast.statements()) {
                 next.postTranslate(builder, importAst, translator);
+                translateLineWrap(translator);
             }
         });
     }

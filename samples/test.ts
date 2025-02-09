@@ -6,8 +6,18 @@ function countdown() {
     players[0].runCommand("/say Hello Conium");
 }
 
-world.beforeEvents.itemUseOn.subscribe((event) => {
+const context = world.beforeEvents.itemUseOn.subscribe((event) => {
     if (event.itemStack.typeId === "minecraft:stick") {
-        world.getPlayers()[0].runCommand("/say Hello Conium");
+        event.source.runCommand("/say Hello Conium!");
     }
 });
+
+world.beforeEvents.itemUseOn.subscribe((event) => {
+    if (event.itemStack.typeId === "minecraft:diamond") {
+        event.source.runCommand("/say Bye Bedrock!");
+
+        world.beforeEvents.itemUseOn.unsubscribe(context);
+    }
+});
+
+const w = 1;

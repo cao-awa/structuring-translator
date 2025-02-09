@@ -11,8 +11,8 @@ public class TypescriptDefineVariable extends TypescriptStatement {
     private TypescriptArgType type;
     private String name;
     private TypescriptResultStatement assigment;
-    private boolean isFinal;
-    private boolean isDefine;
+    private boolean isFinal = false;
+    private boolean isDefine = false;
 
     public TypescriptDefineVariable name(String name) {
         this.name = name;

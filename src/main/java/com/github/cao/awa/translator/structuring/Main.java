@@ -23,7 +23,7 @@ public class Main {
         try {
             TypescriptKotlinScriptTranslator.postRegister();
 
-            String aps = IOUtil.read(new FileReader("samples/test.ts"));
+            String aps = IOUtil.read(new FileReader("samples/gametest.ts"));
 
             TypescriptFile ast = readTypescript(aps);
 
@@ -39,8 +39,8 @@ public class Main {
 
             System.out.println("-- Generate kotlin script");
 
-            String generatedJava = StructuringTranslator.translate(LanguageTranslateTarget.KOTLIN_SCRIPT, TypescriptTranslateElement.FILE, ast);
-            System.out.println(generatedJava);
+            String generatedKotlin = StructuringTranslator.translate(LanguageTranslateTarget.KOTLIN_SCRIPT, TypescriptTranslateElement.FILE, ast);
+            System.out.println(generatedKotlin);
         } catch (Exception e) {
             e.printStackTrace();
         }

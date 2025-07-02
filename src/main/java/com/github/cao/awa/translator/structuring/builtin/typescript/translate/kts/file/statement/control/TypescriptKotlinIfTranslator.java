@@ -53,6 +53,8 @@ public class TypescriptKotlinIfTranslator extends TypescriptKotlinScriptTranslat
             builder.append("}");
         }
 
+        translateLineWrap(this);
+
         if (ast.elseIfStatement() != null) {
             postTranslate(TypescriptTranslateElement.IF, ast.elseIfStatement());
         }

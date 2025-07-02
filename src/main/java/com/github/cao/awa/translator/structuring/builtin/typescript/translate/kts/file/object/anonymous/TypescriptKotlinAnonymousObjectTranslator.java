@@ -20,34 +20,39 @@ public class TypescriptKotlinAnonymousObjectTranslator extends TypescriptKotlinS
     @Override
     public void translate(StringBuilder builder, TypescriptAnonymousObject ast) {
         translateIdent();
-        builder.append("Any() ");
+
+        Map<String, TypescriptResultStatement> elements = ast.params().values();
+
+        builder.append("com.github.cao.awa.translator.structuring.standard.anonymous.AnonymousObject(");
+        // Fixed size.
+        builder.append(elements.size());
+        builder.append(")");
+        builder.append(".run {");
+
         translateLineWrap(this);
 
         pushIdent();
-        translateIdent();
-        builder.append("/* NOT IMPLIED: anonymous object ");
-        translateLineWrap(this);
-
-        Map<String, TypescriptResultStatement> statements = ast.params().values();
-        int size = 1;
         pushIdent();
-        for (Map.Entry<String, TypescriptResultStatement> entry : statements.entrySet()) {
+        int count = 0;
+        for (Map.Entry<String, TypescriptResultStatement> entry : elements.entrySet()) {
             String key = entry.getKey();
             TypescriptResultStatement value = entry.getValue();
             translateIdent();
-            builder.append(key).append(":");
+            builder.append("set(\"");
+            builder.append(key);
+            builder.append("\", ");
             postTranslate(TypescriptTranslateElement.STATEMENT, value, false);
-            if (size != statements.size()) {
-                builder.append(",");
-            }
-            translateLineWrap(this);
-            size++;
+            builder.append(")");
+            translateEnding(this);
         }
         popIdent();
-
+//        translateLineWrap(this);
         translateIdent();
         popIdent();
 
-        builder.append(" */ ");
+        builder.append("}");
+
+        translateIdent();
+        popIdent();
     }
 }

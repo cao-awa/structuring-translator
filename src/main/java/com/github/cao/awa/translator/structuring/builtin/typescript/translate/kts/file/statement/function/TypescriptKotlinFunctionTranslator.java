@@ -27,6 +27,8 @@ public class TypescriptKotlinFunctionTranslator extends TypescriptKotlinScriptTr
         }
         popIdent();
 
+        translateLineWrap(this);
+
         builder.append("}");
 
         translateEnding(this);

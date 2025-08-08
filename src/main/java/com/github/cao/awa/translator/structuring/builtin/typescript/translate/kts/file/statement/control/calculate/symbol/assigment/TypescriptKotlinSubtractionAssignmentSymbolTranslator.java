@@ -4,7 +4,7 @@ import com.github.cao.awa.translator.structuring.builtin.typescript.translate.ba
 import com.github.cao.awa.translator.structuring.builtin.typescript.translate.kts.TypescriptKotlinScriptTranslator;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.control.calculate.symbol.assignment.TypescriptSubtractionAssignmentSymbol;
 
-public class TypescriptKotlinSubtractionAssigmentSymbolTranslator extends TypescriptKotlinScriptTranslator<TypescriptSubtractionAssignmentSymbol> implements TypescriptSubtractionAssignmentSymbolTranslator {
+public class TypescriptKotlinSubtractionAssignmentSymbolTranslator extends TypescriptKotlinScriptTranslator<TypescriptSubtractionAssignmentSymbol> implements TypescriptSubtractionAssignmentSymbolTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptSubtractionAssignmentSymbol ast) {
         builder.append(ast.symbol());

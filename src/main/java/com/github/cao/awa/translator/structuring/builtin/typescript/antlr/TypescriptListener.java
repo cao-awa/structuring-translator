@@ -808,15 +808,15 @@ public interface TypescriptListener extends ParseTreeListener {
 	 */
 	void exitOr(TypescriptParser.OrContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link TypescriptParser#addisionAssignment}.
+	 * Enter a parse tree produced by {@link TypescriptParser#additionAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterAddisionAssignment(TypescriptParser.AddisionAssignmentContext ctx);
+	void enterAdditionAssignment(TypescriptParser.AdditionAssignmentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link TypescriptParser#addisionAssignment}.
+	 * Exit a parse tree produced by {@link TypescriptParser#additionAssignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitAddisionAssignment(TypescriptParser.AddisionAssignmentContext ctx);
+	void exitAdditionAssignment(TypescriptParser.AdditionAssignmentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link TypescriptParser#subtractionAssignment}.
 	 * @param ctx the parse tree

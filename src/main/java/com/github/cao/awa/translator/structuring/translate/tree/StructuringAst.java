@@ -23,11 +23,11 @@ public abstract class StructuringAst {
         print("");
     }
 
-    public void print(String ident) {
-        print(ident, true);
+    public void print(String indent) {
+        print(indent, true);
     }
 
-    public void print(String ident, boolean endElement) {
+    public void print(String indent, boolean endElement) {
 //        print(ident);
     }
 

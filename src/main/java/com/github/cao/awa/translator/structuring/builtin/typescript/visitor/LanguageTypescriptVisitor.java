@@ -490,9 +490,9 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<Structuring
 
         if (ctx.assignment() != null) {
             if (ctx.assignmentIdentifier() != null) {
-                variable.assigment(visitAssignmentIdentifier(ctx.assignmentIdentifier()));
+                variable.assignment(visitAssignmentIdentifier(ctx.assignmentIdentifier()));
             } else {
-                variable.assigment(visitResultPresenting(ctx.resultPresenting()));
+                variable.assignment(visitResultPresenting(ctx.resultPresenting()));
             }
         }
 
@@ -1013,7 +1013,7 @@ public class LanguageTypescriptVisitor extends TypescriptBaseVisitor<Structuring
     }
 
     @Override
-    public StructuringAst visitAddisionAssignment(TypescriptParser.AddisionAssignmentContext ctx) {
+    public StructuringAst visitAdditionAssignment(TypescriptParser.AdditionAssignmentContext ctx) {
         return null;
     }
 

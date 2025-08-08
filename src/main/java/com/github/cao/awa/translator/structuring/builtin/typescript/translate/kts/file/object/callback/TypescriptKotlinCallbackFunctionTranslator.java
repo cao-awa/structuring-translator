@@ -11,13 +11,13 @@ import org.jetbrains.annotations.NotNull;
 public class TypescriptKotlinCallbackFunctionTranslator extends TypescriptKotlinScriptTranslator<TypescriptCallbackFunction> implements TypescriptCallbackFunctionTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptCallbackFunction ast, @NotNull StructuringTranslator<?> source) {
-        inheritIdent(source);
+        inheritIndent(source);
         translate(builder, ast);
     }
 
     @Override
     public void translate(StringBuilder builder, TypescriptCallbackFunction ast) {
-        translateIdent();
+        translateIndent();
         builder.append("{");
 
         if (ast.params() != null && !ast.params().args().isEmpty()) {
@@ -26,18 +26,18 @@ public class TypescriptKotlinCallbackFunctionTranslator extends TypescriptKotlin
         }
         builder.append("\n");
 
-        pushIdent();
+        pushIndent();
         for (TypescriptStatement statement : ast.statements()) {
-            pushIdent();
+            pushIndent();
             postTranslate(TypescriptTranslateElement.STATEMENT, statement);
             if (!statement.isEnding()) {
                 translateEnding(this);
             }
-            popIdent();
+            popIndent();
         }
 
-        translateIdent();
-        popIdent();
+        translateIndent();
+        popIndent();
 
         builder.append("}");
     }

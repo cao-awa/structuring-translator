@@ -13,7 +13,7 @@ import java.util.Iterator;
 public class TypescriptKotlinInvokeParamListTranslator extends TypescriptKotlinScriptTranslator<TypescriptInvokeParamList> implements TypescriptInvokeParamListTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptInvokeParamList ast, @NotNull StructuringTranslator<?> source) {
-        inheritIdent(source);
+        inheritIndent(source);
         translate(builder, ast);
     }
 

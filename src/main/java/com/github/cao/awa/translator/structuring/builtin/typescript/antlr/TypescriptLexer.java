@@ -24,7 +24,7 @@ public class TypescriptLexer extends Lexer {
 		Semicolon=21, Comma=22, Var=23, Let=24, Const=25, True=26, False=27, Function=28, 
 		Import=29, From=30, New=31, If=32, Else=33, Return=34, For=35, While=36, 
 		Break=37, Continue=38, AndSign=39, OrSign=40, Decrement=41, Increment=42, 
-		AddisionAssignment=43, SubtractionAssignment=44, MultiplicationAssignment=45, 
+		AdditionAssignment=43, SubtractionAssignment=44, MultiplicationAssignment=45, 
 		DivisionAssignment=46, PowAssignment=47, Plus=48, Minus=49, Multiply=50, 
 		Divide=51, Pow=52, BreakingAndSign=53, BreakingOrSign=54, Not=55, Identifier=56, 
 		FullName=57, Number=58;
@@ -44,7 +44,7 @@ public class TypescriptLexer extends Lexer {
 			"Equals", "Equal", "CallbackAssigment", "Null", "Undefined", "Colon", 
 			"Semicolon", "Comma", "Var", "Let", "Const", "True", "False", "Function", 
 			"Import", "From", "New", "If", "Else", "Return", "For", "While", "Break", 
-			"Continue", "AndSign", "OrSign", "Decrement", "Increment", "AddisionAssignment", 
+			"Continue", "AndSign", "OrSign", "Decrement", "Increment", "AdditionAssignment", 
 			"SubtractionAssignment", "MultiplicationAssignment", "DivisionAssignment", 
 			"PowAssignment", "Plus", "Minus", "Multiply", "Divide", "Pow", "BreakingAndSign", 
 			"BreakingOrSign", "Not", "Identifier", "FullName", "Number"
@@ -72,7 +72,7 @@ public class TypescriptLexer extends Lexer {
 			"Equals", "Equal", "CallbackAssigment", "Null", "Undefined", "Colon", 
 			"Semicolon", "Comma", "Var", "Let", "Const", "True", "False", "Function", 
 			"Import", "From", "New", "If", "Else", "Return", "For", "While", "Break", 
-			"Continue", "AndSign", "OrSign", "Decrement", "Increment", "AddisionAssignment", 
+			"Continue", "AndSign", "OrSign", "Decrement", "Increment", "AdditionAssignment", 
 			"SubtractionAssignment", "MultiplicationAssignment", "DivisionAssignment", 
 			"PowAssignment", "Plus", "Minus", "Multiply", "Divide", "Pow", "BreakingAndSign", 
 			"BreakingOrSign", "Not", "Identifier", "FullName", "Number"

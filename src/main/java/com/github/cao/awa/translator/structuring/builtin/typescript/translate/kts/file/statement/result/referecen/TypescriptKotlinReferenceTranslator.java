@@ -9,8 +9,8 @@ import org.jetbrains.annotations.NotNull;
 public class TypescriptKotlinReferenceTranslator extends TypescriptKotlinScriptTranslator<TypescriptReference> implements TypescriptReferenceTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptReference ast, @NotNull StructuringTranslator<?> source) {
-        inheritIdent(source);
-        translateIdent();
+        inheritIndent(source);
+        translateIndent();
         translate(builder, ast);
     }
 

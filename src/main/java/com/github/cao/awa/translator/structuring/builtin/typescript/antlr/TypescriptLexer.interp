@@ -103,7 +103,7 @@ AndSign
 OrSign
 Decrement
 Increment
-AddisionAssignment
+AdditionAssignment
 SubtractionAssignment
 MultiplicationAssignment
 DivisionAssignment
@@ -163,7 +163,7 @@ AndSign
 OrSign
 Decrement
 Increment
-AddisionAssignment
+AdditionAssignment
 SubtractionAssignment
 MultiplicationAssignment
 DivisionAssignment

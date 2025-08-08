@@ -14,7 +14,7 @@ public class TypescriptKotlinForTranslator extends TypescriptKotlinScriptTransla
             builder.append("var ");
             builder.append(variable.name());
             builder.append("=");
-            postTranslate(TypescriptTranslateElement.STATEMENT, variable.assigment());
+            postTranslate(TypescriptTranslateElement.STATEMENT, variable.assignment());
             builder.append(";");
             translateLineWrap(this);
 
@@ -23,7 +23,7 @@ public class TypescriptKotlinForTranslator extends TypescriptKotlinScriptTransla
             builder.append("){");
 
             translateLineWrap(this);
-            pushIdent();
+            pushIndent();
 
             postTranslate(TypescriptTranslateElement.STATEMENT, ast.operationStatement());
             if (!ast.operationStatement().isEnding()) {
@@ -37,7 +37,7 @@ public class TypescriptKotlinForTranslator extends TypescriptKotlinScriptTransla
                 }
             }
 
-            popIdent();
+            popIndent();
 
             builder.append("}");
 

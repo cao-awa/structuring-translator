@@ -64,18 +64,18 @@ public class Main {
         return visitor.visitProgram(programContext);
     }
 
-    public static void printTree(String ident, ParseTree tree) {
+    public static void printTree(String indent, ParseTree tree) {
         if (tree instanceof TerminalNode) {
             if (tree instanceof ErrorNode error) {
-                System.out.println(ident + "Token: " + tree.getText() + " (" + tree.getClass().getSimpleName() + ")");
+                System.out.println(indent + "Token: " + tree.getText() + " (" + tree.getClass().getSimpleName() + ")");
             } else {
-                System.out.println(ident + "Token: " + tree.getText());
+                System.out.println(indent + "Token: " + tree.getText());
             }
         } else {
-            System.out.println(ident + tree.getClass().getSimpleName());
+            System.out.println(indent + tree.getClass().getSimpleName());
         }
         for (int i = 0; i < tree.getChildCount(); i++) {
-            printTree(ident + "    ", tree.getChild(i));
+            printTree(indent + "    ", tree.getChild(i));
         }
     }
 }

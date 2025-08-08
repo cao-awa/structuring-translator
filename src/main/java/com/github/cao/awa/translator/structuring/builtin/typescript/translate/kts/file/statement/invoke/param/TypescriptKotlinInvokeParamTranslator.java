@@ -10,14 +10,14 @@ import org.jetbrains.annotations.NotNull;
 public class TypescriptKotlinInvokeParamTranslator extends TypescriptKotlinScriptTranslator<TypescriptInvokeParam> implements TypescriptInvokeParamTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptInvokeParam ast, @NotNull StructuringTranslator<?> source) {
-        inheritIdent(source);
+        inheritIndent(source);
         translate(builder, ast);
     }
 
     @Override
     public void translate(StringBuilder builder, TypescriptInvokeParam ast) {
         if (ast.reference() != null) {
-            translateIdent();
+            translateIndent();
             builder.append(ast.reference());
         } else if (ast.result() != null) {
             postTranslate(TypescriptTranslateElement.STATEMENT, ast.result());

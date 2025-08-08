@@ -491,11 +491,11 @@ public interface TypescriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOr(TypescriptParser.OrContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link TypescriptParser#addisionAssignment}.
+	 * Visit a parse tree produced by {@link TypescriptParser#additionAssignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAddisionAssignment(TypescriptParser.AddisionAssignmentContext ctx);
+	T visitAdditionAssignment(TypescriptParser.AdditionAssignmentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link TypescriptParser#subtractionAssignment}.
 	 * @param ctx the parse tree

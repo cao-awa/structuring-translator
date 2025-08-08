@@ -10,7 +10,7 @@ import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
 public class TypescriptDefineVariable extends TypescriptStatement {
     private TypescriptArgType type;
     private String name;
-    private TypescriptResultStatement assigment;
+    private TypescriptResultStatement assignment;
     private boolean isFinal = false;
     private boolean isDefine = false;
 
@@ -59,12 +59,12 @@ public class TypescriptDefineVariable extends TypescriptStatement {
         return this.isDefine;
     }
 
-    public void assigment(TypescriptResultStatement assigment) {
-        this.assigment = assigment;
+    public void assignment(TypescriptResultStatement assignment) {
+        this.assignment = assignment;
     }
 
-    public TypescriptResultStatement assigment() {
-        return this.assigment;
+    public TypescriptResultStatement assignment() {
+        return this.assignment;
     }
 
     public TypescriptDefineVariable(StructuringAst parent) {
@@ -80,28 +80,28 @@ public class TypescriptDefineVariable extends TypescriptStatement {
             this.type.generateStructure(theType);
             json.put("type", theType);
         }
-        if (this.assigment != null) {
-            JSONObject theAssigment = new JSONObject();
-            this.assigment.generateStructure(theAssigment);
-            json.put("assigment", theAssigment);
+        if (this.assignment != null) {
+            JSONObject theAssignment = new JSONObject();
+            this.assignment.generateStructure(theAssignment);
+            json.put("assignment", theAssignment);
         }
     }
 
     @Override
     public void preprocess() {
         Manipulate.makeNonNull(this.type, TypescriptArgType::preprocess);
-        Manipulate.makeNonNull(this.assigment, TypescriptResultStatement::preprocess);
+        Manipulate.makeNonNull(this.assignment, TypescriptResultStatement::preprocess);
     }
 
     @Override
     public void postprocess() {
         Manipulate.makeNonNull(this.type, TypescriptArgType::postprocess);
-        Manipulate.makeNonNull(this.assigment, TypescriptResultStatement::postprocess);
+        Manipulate.makeNonNull(this.assignment, TypescriptResultStatement::postprocess);
     }
 
     @Override
     public void consequence() {
         Manipulate.makeNonNull(this.type, TypescriptArgType::consequence);
-        Manipulate.makeNonNull(this.assigment, TypescriptResultStatement::consequence);
+        Manipulate.makeNonNull(this.assignment, TypescriptResultStatement::consequence);
     }
 }

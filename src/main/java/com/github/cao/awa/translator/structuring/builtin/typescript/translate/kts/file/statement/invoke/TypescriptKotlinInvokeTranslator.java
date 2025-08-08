@@ -20,14 +20,14 @@ public class TypescriptKotlinInvokeTranslator extends TypescriptKotlinScriptTran
             if (ast.params().size() > 1) {
                 translateLineWrap(this);
 
-                pushIdent();
+                pushIndent();
                 postTranslate(TypescriptTranslateElement.INVOKE_PARAM_LIST, ast.params());
 
                 translateLineWrap(this);
 
-                translateIdent();
+                translateIndent();
 
-                popIdent();
+                popIndent();
             } else {
                 postTranslate(TypescriptTranslateElement.INVOKE_PARAM_LIST, ast.params(), false);
 

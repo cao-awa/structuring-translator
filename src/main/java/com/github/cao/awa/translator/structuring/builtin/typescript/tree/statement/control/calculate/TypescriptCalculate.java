@@ -123,7 +123,7 @@ public class TypescriptCalculate extends TypescriptResultStatement {
     }
 
     @Override
-    public void print(String ident) {
+    public void print(String indent) {
     }
 
 

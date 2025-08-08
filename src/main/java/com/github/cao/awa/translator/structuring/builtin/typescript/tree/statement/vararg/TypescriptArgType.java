@@ -105,7 +105,7 @@ public class TypescriptArgType extends TypescriptStatement {
     }
 
     @Override
-    public void print(String ident) {
+    public void print(String indent) {
         StringBuilder varargCountBuilder = new StringBuilder();
         if (!this.args.isEmpty()) {
             varargCountBuilder.append("<");
@@ -113,9 +113,9 @@ public class TypescriptArgType extends TypescriptStatement {
             varargCountBuilder.delete(varargCountBuilder.length() - 2, varargCountBuilder.length());
             varargCountBuilder.append(">");
         }
-        System.out.println(ident + "|_ " + this.name + varargCountBuilder + (this.arrayArgType ? "[?]".repeat(this.arrayDepth) : ""));
+        System.out.println(indent + "|_ " + this.name + varargCountBuilder + (this.arrayArgType ? "[?]".repeat(this.arrayDepth) : ""));
         for (TypescriptArgType argType : this.args) {
-            argType.print(ident + "    ");
+            argType.print(indent + "    ");
         }
     }
 

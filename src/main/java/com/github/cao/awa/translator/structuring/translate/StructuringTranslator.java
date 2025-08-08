@@ -16,32 +16,32 @@ import java.util.function.Function;
 
 public abstract class StructuringTranslator<T extends StructuringAst> implements StructuringElementTranslator<T> {
     public static final String DEFAULT_PROVIDER = "generic";
-    public static final String VERSION = "1.1.4-fix4";
+    public static final String VERSION = "1.1.4-fix5";
     private static final Map<String, Map<LanguageTranslateTarget, Map<TranslateElementData<?>, StructuringTranslator<?>>>> translators = CollectionFactor.hashMap();
     private static boolean enableLineWrap = true;
-    private static boolean enableIdent = true;
+    private static boolean enableIndent = true;
     private String requiredProvider = DEFAULT_PROVIDER;
     private StringBuilder builder;
     private T ast;
     @Range(from = 0, to = Integer.MAX_VALUE)
-    private int currentIdent = 0;
+    private int currentIndent = 0;
     @Range(from = 0, to = Integer.MAX_VALUE)
-    private int ident = 0;
-    private String identStyle = "    ";
+    private int indent = 0;
+    private String indentStyle = "    ";
 
     @Contract(pure = true)
     public static String getVersion() {
         return VERSION;
     }
 
-    public static void enableIdent(boolean enableIdent) {
-        StructuringTranslator.enableIdent = enableIdent;
+    public static void enableIndent(boolean enableIndent) {
+        StructuringTranslator.enableIndent = enableIndent;
         enableLineWrap(true);
     }
 
     @Contract(pure = true)
-    public static boolean isEnableIdent() {
-        return enableIdent;
+    public static boolean isEnableIndent() {
+        return enableIndent;
     }
 
     public static void enableLineWrap(boolean enableLineWrap) {
@@ -53,22 +53,22 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
         return enableLineWrap;
     }
 
-    public void pushIdent() {
-        this.currentIdent++;
+    public void pushIndent() {
+        this.currentIndent++;
 
-        this.ident = this.currentIdent;
+        this.indent = this.currentIndent;
     }
 
-    public void popIdent() {
-        if (this.currentIdent > 0) {
-            this.currentIdent--;
+    public void popIndent() {
+        if (this.currentIndent > 0) {
+            this.currentIndent--;
         }
 
-        this.ident = this.currentIdent;
+        this.indent = this.currentIndent;
     }
 
-    public StructuringTranslator<T> identStyle(String identStyle) {
-        this.identStyle = identStyle;
+    public StructuringTranslator<T> indentStyle(String indentStyle) {
+        this.indentStyle = indentStyle;
         return this;
     }
 
@@ -170,18 +170,18 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
         this.builder = builder;
         this.ast = ast;
         translate(builder, ast, source);
-        if (source.ident != source.currentIdent) {
-            source.currentIdent = source.ident;
+        if (source.indent != source.currentIndent) {
+            source.currentIndent = source.indent;
         }
     }
 
-    public void postTranslate(StringBuilder builder, T ast, @NotNull StructuringTranslator<?> source, boolean ident) {
-        int currentIdent = source.currentIdent;
-        if (!ident) {
-            source.currentIdent = 0;
+    public void postTranslate(StringBuilder builder, T ast, @NotNull StructuringTranslator<?> source, boolean indent) {
+        int currentIndent = source.currentIndent;
+        if (!indent) {
+            source.currentIndent = 0;
         }
         postTranslate(builder, ast, source);
-        source.currentIdent = currentIdent;
+        source.currentIndent = currentIndent;
     }
 
     public String postTranslateToString(T ast) {
@@ -202,15 +202,15 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
         this.ast = recovery;
     }
 
-    public <X extends StructuringAst> void postTranslate(String provider, TranslateElementData<X> element, X ast, boolean ident) {
+    public <X extends StructuringAst> void postTranslate(String provider, TranslateElementData<X> element, X ast, boolean indent) {
         T recovery = this.ast;
-        translator(provider, element).postTranslate(this.builder, ast, this, ident);
+        translator(provider, element).postTranslate(this.builder, ast, this, indent);
         this.ast = recovery;
     }
 
-    public <X extends StructuringAst> void postTranslate(TranslateElementData<X> element, X ast, boolean ident) {
+    public <X extends StructuringAst> void postTranslate(TranslateElementData<X> element, X ast, boolean indent) {
         T recovery = this.ast;
-        translator(this.requiredProvider, element).postTranslate(this.builder, ast, this, ident);
+        translator(this.requiredProvider, element).postTranslate(this.builder, ast, this, indent);
         this.ast = recovery;
     }
 
@@ -218,8 +218,8 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
         postTranslate(element, nextAst.apply(this.ast));
     }
 
-    public <X extends StructuringAst> void postNextTranslate(TranslateElementData<X> element, Function<T, X> nextAst, boolean ident) {
-        postTranslate(element, nextAst.apply(this.ast), ident);
+    public <X extends StructuringAst> void postNextTranslate(TranslateElementData<X> element, Function<T, X> nextAst, boolean indent) {
+        postTranslate(element, nextAst.apply(this.ast), indent);
     }
 
     public static <X extends StructuringAst> StructuringTranslator<X> translator(String provider, LanguageTranslateTarget target, TranslateElementData<X> element) {
@@ -251,15 +251,15 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
         this.ast = recovery;
     }
 
-    public void translateIdent() {
-        if (enableIdent) {
-            this.builder.append(String.valueOf(this.identStyle).repeat(this.currentIdent));
+    public void translateIndent() {
+        if (enableIndent) {
+            this.builder.append(String.valueOf(this.indentStyle).repeat(this.currentIndent));
         }
     }
 
-    public void inheritIdent(@NotNull StructuringTranslator<?> source) {
-        this.currentIdent = source.currentIdent;
-        this.ident = source.ident;
-        this.identStyle = source.identStyle;
+    public void inheritIndent(@NotNull StructuringTranslator<?> source) {
+        this.currentIndent = source.currentIndent;
+        this.indent = source.indent;
+        this.indentStyle = source.indentStyle;
     }
 }

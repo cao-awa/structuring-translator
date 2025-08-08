@@ -13,13 +13,13 @@ import java.util.Map;
 public class TypescriptKotlinAnonymousObjectTranslator extends TypescriptKotlinScriptTranslator<TypescriptAnonymousObject> implements TypescriptAnonymousObjectTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptAnonymousObject ast, @NotNull StructuringTranslator<?> source) {
-        inheritIdent(source);
+        inheritIndent(source);
         translate(builder, ast);
     }
 
     @Override
     public void translate(StringBuilder builder, TypescriptAnonymousObject ast) {
-        translateIdent();
+        translateIndent();
 
         Map<String, TypescriptResultStatement> elements = ast.params().values();
 
@@ -31,13 +31,13 @@ public class TypescriptKotlinAnonymousObjectTranslator extends TypescriptKotlinS
 
         translateLineWrap(this);
 
-        pushIdent();
-        pushIdent();
+        pushIndent();
+        pushIndent();
         int count = 0;
         for (Map.Entry<String, TypescriptResultStatement> entry : elements.entrySet()) {
             String key = entry.getKey();
             TypescriptResultStatement value = entry.getValue();
-            translateIdent();
+            translateIndent();
             builder.append("set(\"");
             builder.append(key);
             builder.append("\", ");
@@ -45,14 +45,14 @@ public class TypescriptKotlinAnonymousObjectTranslator extends TypescriptKotlinS
             builder.append(")");
             translateEnding(this);
         }
-        popIdent();
+        popIndent();
 //        translateLineWrap(this);
-        translateIdent();
-        popIdent();
+        translateIndent();
+        popIndent();
 
         builder.append("}");
 
-        translateIdent();
-        popIdent();
+        translateIndent();
+        popIndent();
     }
 }

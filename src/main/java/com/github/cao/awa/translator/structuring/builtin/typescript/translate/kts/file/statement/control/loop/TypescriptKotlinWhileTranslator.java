@@ -15,14 +15,14 @@ public class TypescriptKotlinWhileTranslator extends TypescriptKotlinScriptTrans
 
         translateLineWrap(this);
 
-        pushIdent();
+        pushIndent();
         for (TypescriptStatement statement : ast.statements()) {
             postTranslate(TypescriptTranslateElement.STATEMENT, statement);
             if (!statement.isEnding()) {
                 translateEnding(this);
             }
         }
-        popIdent();
+        popIndent();
 
         builder.append("}");
 

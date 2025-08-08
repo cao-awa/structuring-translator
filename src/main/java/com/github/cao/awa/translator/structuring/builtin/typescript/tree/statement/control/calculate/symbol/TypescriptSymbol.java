@@ -46,7 +46,7 @@ public abstract class TypescriptSymbol extends TypescriptResultStatement {
         return true;
     }
 
-    public boolean isAssigment() {
+    public boolean isAssignment() {
         return false;
     }
 

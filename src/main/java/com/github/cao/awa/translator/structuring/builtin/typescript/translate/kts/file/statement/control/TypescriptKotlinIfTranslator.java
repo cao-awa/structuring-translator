@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class TypescriptKotlinIfTranslator extends TypescriptKotlinScriptTranslator<TypescriptIf> implements TypescriptIfTranslator {
     @Override
     public void translate(StringBuilder builder, TypescriptIf ast, @NotNull StructuringTranslator<?> source) {
-        inheritIdent(source);
+        inheritIndent(source);
         translate(builder, ast);
     }
 
@@ -22,16 +22,16 @@ public class TypescriptKotlinIfTranslator extends TypescriptKotlinScriptTranslat
         builder.append("){");
         translateLineWrap(this);
 
-        pushIdent();
+        pushIndent();
         for (TypescriptStatement statement : ast.statements()) {
             postTranslate(TypescriptTranslateElement.STATEMENT, statement);
             if (!statement.isEnding()) {
                 translateEnding(this);
             }
         }
-        popIdent();
+        popIndent();
 
-        translateIdent();
+        translateIndent();
 
         builder.append("}");
 
@@ -39,16 +39,16 @@ public class TypescriptKotlinIfTranslator extends TypescriptKotlinScriptTranslat
             builder.append("else{");
             translateLineWrap(this);
 
-            pushIdent();
+            pushIndent();
             for (TypescriptStatement statement : ast.elseStatements()) {
                 postTranslate(TypescriptTranslateElement.STATEMENT, statement);
                 if (!statement.isEnding()) {
                     translateEnding(this);
                 }
             }
-            popIdent();
+            popIndent();
 
-            translateIdent();
+            translateIndent();
 
             builder.append("}");
         }

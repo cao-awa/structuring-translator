@@ -22,9 +22,9 @@ public class TypescriptKotlinScriptDefineVariableTranslator extends TypescriptKo
 //            postTranslate(TypescriptTranslateElement.ARG_TYPE, ast.type());
 //        }
 
-        if (ast.assigment() != null) {
+        if (ast.assignment() != null) {
             builder.append("=");
-            postTranslate(TypescriptTranslateElement.STATEMENT, ast.assigment());
+            postTranslate(TypescriptTranslateElement.STATEMENT, ast.assignment());
         } else {
             builder.append(":Any?=null");
         }

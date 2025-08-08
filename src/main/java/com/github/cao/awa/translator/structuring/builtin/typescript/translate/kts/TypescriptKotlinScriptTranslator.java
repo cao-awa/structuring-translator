@@ -105,11 +105,11 @@ public abstract class TypescriptKotlinScriptTranslator<T extends StructuringAst>
         registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_LESS_THAN, new TypescriptKotlinLessThanSymbolTranslator());
         registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_MORE_THAN, new TypescriptKotlinMoreThanSymbolTranslator());
 
-        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_ADDITION_ASSIGMENT, new TypescriptKotlinAdditionAssigmentSymbolTranslator());
-        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_SUBTRACTION_ASSIGMENT, new TypescriptKotlinSubtractionAssigmentSymbolTranslator());
-        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_DIVISION_ASSIGMENT, new TypescriptKotlinDivisionAssigmentSymbolTranslator());
-        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_MULTIPLICATION_ASSIGMENT, new TypescriptKotlinMultiplicationAssigmentSymbolTranslator());
-        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_POW_ASSIGMENT, new TypescriptKotlinPowAssigmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_ADDITION_ASSIGMENT, new TypescriptKotlinAdditionAssignmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_SUBTRACTION_ASSIGMENT, new TypescriptKotlinSubtractionAssignmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_DIVISION_ASSIGMENT, new TypescriptKotlinDivisionAssignmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_MULTIPLICATION_ASSIGMENT, new TypescriptKotlinMultiplicationAssignmentSymbolTranslator());
+        registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_POW_ASSIGMENT, new TypescriptKotlinPowAssignmentSymbolTranslator());
 
         registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_PLUS, new TypescriptKotlinPlusSymbolTranslator());
         registerKotlinScript(DEFAULT_PROVIDER, TypescriptTranslateElement.SYMBOL_MINUS, new TypescriptKotlinMinusSymbolTranslator());

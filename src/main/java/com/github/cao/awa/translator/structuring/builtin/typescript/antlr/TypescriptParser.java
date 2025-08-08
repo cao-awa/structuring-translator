@@ -24,10 +24,10 @@ public class TypescriptParser extends Parser {
 		Semicolon=21, Comma=22, Var=23, Let=24, Const=25, True=26, False=27, Function=28, 
 		Import=29, From=30, New=31, If=32, Else=33, Return=34, For=35, While=36, 
 		Break=37, Continue=38, AndSign=39, OrSign=40, Decrement=41, Increment=42, 
-		AddisionAssignment=43, SubtractionAssignment=44, MultiplicationAssignment=45, 
+		AdditionAssignment=43, SubtractionAssignment=44, MultiplicationAssignment=45, 
 		DivisionAssignment=46, PowAssignment=47, Plus=48, Minus=49, Multiply=50, 
 		Divide=51, Pow=52, BreakingAndSign=53, BreakingOrSign=54, Not=55, Identifier=56, 
-		FullName=57, Number=58;
+		FullName=57, Number=58, AddisionAssignment=59;
 	public static final int
 		RULE_program = 0, RULE_defineStatement = 1, RULE_theStatement = 2, RULE_importStatement = 3, 
 		RULE_defineFunction = 4, RULE_defineVariableStatement = 5, RULE_resultPresenting = 6, 
@@ -55,7 +55,7 @@ public class TypescriptParser extends Parser {
 		RULE_leftBracket = 70, RULE_rightBracket = 71, RULE_leftParenthesis = 72, 
 		RULE_rightParenthesis = 73, RULE_leftParen = 74, RULE_rightParen = 75, 
 		RULE_assignment = 76, RULE_isEndingLine = 77, RULE_and = 78, RULE_or = 79, 
-		RULE_addisionAssignment = 80, RULE_subtractionAssignment = 81, RULE_multiplicationAssignment = 82, 
+		RULE_additionAssignment = 80, RULE_subtractionAssignment = 81, RULE_multiplicationAssignment = 82, 
 		RULE_divisionAssignment = 83, RULE_powAssignment = 84, RULE_plus = 85, 
 		RULE_minus = 86, RULE_multiply = 87, RULE_divide = 88, RULE_pow = 89, 
 		RULE_operator = 90, RULE_arithmetic = 91, RULE_breakingAnd = 92, RULE_breakingOr = 93, 
@@ -83,7 +83,7 @@ public class TypescriptParser extends Parser {
 			"constant", "assignmentIdentifier", "point", "leftBrace", "rightBrace", 
 			"leftAngleBracket", "rightAngleBracket", "leftBracket", "rightBracket", 
 			"leftParenthesis", "rightParenthesis", "leftParen", "rightParen", "assignment", 
-			"isEndingLine", "and", "or", "addisionAssignment", "subtractionAssignment", 
+			"isEndingLine", "and", "or", "additionAssignment", "subtractionAssignment", 
 			"multiplicationAssignment", "divisionAssignment", "powAssignment", "plus", 
 			"minus", "multiply", "divide", "pow", "operator", "arithmetic", "breakingAnd", 
 			"breakingOr", "not", "lessThan", "moreThan", "comparingAnd", "comparingOr", 
@@ -113,10 +113,10 @@ public class TypescriptParser extends Parser {
 			"Equals", "Equal", "CallbackAssigment", "Null", "Undefined", "Colon", 
 			"Semicolon", "Comma", "Var", "Let", "Const", "True", "False", "Function", 
 			"Import", "From", "New", "If", "Else", "Return", "For", "While", "Break", 
-			"Continue", "AndSign", "OrSign", "Decrement", "Increment", "AddisionAssignment", 
+			"Continue", "AndSign", "OrSign", "Decrement", "Increment", "AdditionAssignment", 
 			"SubtractionAssignment", "MultiplicationAssignment", "DivisionAssignment", 
 			"PowAssignment", "Plus", "Minus", "Multiply", "Divide", "Pow", "BreakingAndSign", 
-			"BreakingOrSign", "Not", "Identifier", "FullName", "Number"
+			"BreakingOrSign", "Not", "Identifier", "FullName", "Number", "AddisionAssignment"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -2895,7 +2895,7 @@ public class TypescriptParser extends Parser {
 				setState(485);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 72050447212397312L) != 0)) {
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 648502403422798592L) != 0)) {
 					{
 					{
 					setState(482);
@@ -2918,7 +2918,7 @@ public class TypescriptParser extends Parser {
 				setState(492);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 72050447212397312L) != 0)) {
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 648502403422798592L) != 0)) {
 					{
 					{
 					setState(489);
@@ -3002,7 +3002,7 @@ public class TypescriptParser extends Parser {
 			setState(503);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 72050447212397312L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 648502403422798592L) != 0)) {
 				{
 				{
 				setState(500);
@@ -5367,35 +5367,35 @@ public class TypescriptParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class AddisionAssignmentContext extends ParserRuleContext {
-		public TerminalNode AddisionAssignment() { return getToken(TypescriptParser.AddisionAssignment, 0); }
-		public AddisionAssignmentContext(ParserRuleContext parent, int invokingState) {
+	public static class AdditionAssignmentContext extends ParserRuleContext {
+		public TerminalNode AdditionAssignment() { return getToken(TypescriptParser.AdditionAssignment, 0); }
+		public AdditionAssignmentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_addisionAssignment; }
+		@Override public int getRuleIndex() { return RULE_additionAssignment; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof TypescriptListener ) ((TypescriptListener)listener).enterAddisionAssignment(this);
+			if ( listener instanceof TypescriptListener ) ((TypescriptListener)listener).enterAdditionAssignment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof TypescriptListener ) ((TypescriptListener)listener).exitAddisionAssignment(this);
+			if ( listener instanceof TypescriptListener ) ((TypescriptListener)listener).exitAdditionAssignment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof TypescriptVisitor ) return ((TypescriptVisitor<? extends T>)visitor).visitAddisionAssignment(this);
+			if ( visitor instanceof TypescriptVisitor ) return ((TypescriptVisitor<? extends T>)visitor).visitAdditionAssignment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final AddisionAssignmentContext addisionAssignment() throws RecognitionException {
-		AddisionAssignmentContext _localctx = new AddisionAssignmentContext(_ctx, getState());
-		enterRule(_localctx, 160, RULE_addisionAssignment);
+	public final AdditionAssignmentContext additionAssignment() throws RecognitionException {
+		AdditionAssignmentContext _localctx = new AdditionAssignmentContext(_ctx, getState());
+		enterRule(_localctx, 160, RULE_additionAssignment);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(683);
-			match(AddisionAssignment);
+			match(AdditionAssignment);
 			}
 		}
 		catch (RecognitionException re) {
@@ -5833,7 +5833,6 @@ public class TypescriptParser extends Parser {
 			setState(706);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case AddisionAssignment:
 			case SubtractionAssignment:
 			case MultiplicationAssignment:
 			case DivisionAssignment:
@@ -5843,6 +5842,7 @@ public class TypescriptParser extends Parser {
 			case Multiply:
 			case Divide:
 			case Pow:
+			case AddisionAssignment:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(703);
@@ -5925,7 +5925,7 @@ public class TypescriptParser extends Parser {
 			{
 			setState(708);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 8998403161718784L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 585450359372120064L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -6675,7 +6675,7 @@ public class TypescriptParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001:\u02ed\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001;\u02ed\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -6774,7 +6774,7 @@ public class TypescriptParser extends Parser {
 		"\u008e\u0090\u0092\u0094\u0096\u0098\u009a\u009c\u009e\u00a0\u00a2\u00a4"+
 		"\u00a6\u00a8\u00aa\u00ac\u00ae\u00b0\u00b2\u00b4\u00b6\u00b8\u00ba\u00bc"+
 		"\u00be\u00c0\u00c2\u00c4\u00c6\u00c8\u00ca\u00cc\u00ce\u00d0\u00d2\u0000"+
-		"\u0004\u0001\u0000+4\u0001\u0000\u0017\u0019\u0001\u000089\u0001\u0000"+
+		"\u0004\u0002\u0000,4;;\u0001\u0000\u0017\u0019\u0001\u000089\u0001\u0000"+
 		"\u001a\u001b\u02e5\u0000\u00d4\u0001\u0000\u0000\u0000\u0002\u00db\u0001"+
 		"\u0000\u0000\u0000\u0004\u00ef\u0001\u0000\u0000\u0000\u0006\u00f1\u0001"+
 		"\u0000\u0000\u0000\b\u0100\u0001\u0000\u0000\u0000\n\u0110\u0001\u0000"+

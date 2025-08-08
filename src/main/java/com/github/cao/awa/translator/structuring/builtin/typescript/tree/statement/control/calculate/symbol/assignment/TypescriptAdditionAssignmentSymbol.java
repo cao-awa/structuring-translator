@@ -25,7 +25,7 @@ public class TypescriptAdditionAssignmentSymbol extends TypescriptSymbol {
     }
 
     @Override
-    public boolean isAssigment() {
+    public boolean isAssignment() {
         return true;
     }
 

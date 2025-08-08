@@ -18,14 +18,14 @@ public class TypescriptKotlinFunctionTranslator extends TypescriptKotlinScriptTr
         builder.append("){");
         translateLineWrap(this);
 
-        pushIdent();
+        pushIndent();
         for (TypescriptStatement statement : ast.statements()) {
             postTranslate(TypescriptTranslateElement.STATEMENT, statement);
             if (!statement.isEnding()) {
                 translateEnding(this);
             }
         }
-        popIdent();
+        popIndent();
 
         translateLineWrap(this);
 

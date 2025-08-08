@@ -85,12 +85,12 @@ or      : OrSign  ;
 Decrement : '--' ;
 Increment : '++' ;
 
-AddisionAssignment       : '+='                                   ;
+AdditionAssignment       : '+='                                   ;
 SubtractionAssignment    : '-='                                   ;
 MultiplicationAssignment : '*='                                   ;
 DivisionAssignment       : '/='                                   ;
 PowAssignment            : '^='                                   ;
-addisionAssignment       : AddisionAssignment                     ;
+additionAssignment       : AdditionAssignment                     ;
 subtractionAssignment    : SubtractionAssignment                  ;
 multiplicationAssignment : MultiplicationAssignment               ;
 divisionAssignment       : DivisionAssignment                     ;

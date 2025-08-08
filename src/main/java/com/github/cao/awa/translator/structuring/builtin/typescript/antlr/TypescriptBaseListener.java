@@ -977,13 +977,13 @@ public class TypescriptBaseListener implements TypescriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAddisionAssignment(TypescriptParser.AddisionAssignmentContext ctx) { }
+	@Override public void enterAdditionAssignment(TypescriptParser.AdditionAssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAddisionAssignment(TypescriptParser.AddisionAssignmentContext ctx) { }
+	@Override public void exitAdditionAssignment(TypescriptParser.AdditionAssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

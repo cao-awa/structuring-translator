@@ -107,7 +107,7 @@ divide                   : Divide                                 ;
 pow                      : Pow                                    ;
 operator                 : arithmetic | comparing | not           ;
 
-arithmetic : AddisionAssignment       |
+arithmetic : AdditionAssignment       |
              SubtractionAssignment    |
              MultiplicationAssignment |
              DivisionAssignment       |

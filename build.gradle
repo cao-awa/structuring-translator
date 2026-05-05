@@ -6,6 +6,17 @@ plugins {
 group = "$project.group_id"
 version = "$project.version_name"
 
+publishing {
+    publications {
+        gpr(MavenPublication) {
+            groupId = project.group_id
+            artifactId = project.artifact_id
+            version = project.version_name
+
+            from components.java
+        }
+    }
+}
 
 repositories {
     mavenCentral()

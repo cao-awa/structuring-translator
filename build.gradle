@@ -13,42 +13,7 @@ repositories {
 repositories {
     mavenCentral()
     maven {
-        name = "GitHubPackages"
-        url = "https://maven.pkg.github.com/cao-awa/Catheter"
-        credentials {
-            username = "cao-awa"
-            password = "ghp_UgALm1Ta2ONYeNh" + "S2m0XoWSc27BcE22v4Umn"
-        }
-    }
-    maven {
-        name = "GitHubPackages"
-        url = "https://maven.pkg.github.com/cao-awa/Sinuatum"
-        credentials {
-            username = "cao-awa"
-            password = "ghp_UgALm1Ta2ONYeNh" + "S2m0XoWSc27BcE22v4Umn"
-        }
-    }
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/cao-awa/structuring-translator")
-            credentials {
-                username = System.getenv("GH_ACTOR")
-                password = System.getenv("GH_TOKEN")
-            }
-        }
-    }
-    publications {
-        gpr(MavenPublication) {
-            groupId = project.group_id
-            artifactId = project.artifact_id
-            version = project.version_name
-
-            from components.java
-        }
+        url 'https://jitpack.io'
     }
 }
 

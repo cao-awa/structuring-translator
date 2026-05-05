@@ -3,23 +3,15 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'com.github.cao.awa'
-version = project.version_name
+group = "$project.group_id"
+version = "$project.version_name"
 
-repositories {
-    mavenCentral()
-}
 
 repositories {
     mavenCentral()
     maven {
         url 'https://jitpack.io'
     }
-}
-
-configurations {
-    create("shadow")
-    implementation.extendsFrom(shadow)
 }
 
 dependencies {
@@ -31,48 +23,19 @@ dependencies {
     implementation 'com.alibaba.fastjson2:fastjson2:2.0.50'
 
     implementation 'org.antlr:antlr4:4.13.2'
-    shadow 'org.antlr:antlr4-runtime:4.13.2'
+    implementation 'org.antlr:antlr4-runtime:4.13.2'
 
     implementation 'com.github.cao-awa:sinuatum:1.0.17'
 }
 
-test {
-    useJUnitPlatform()
+tasks.register('sourceJar', Jar) {
+    dependsOn classes
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = "utf-8"
-}
-tasks.withType(Javadoc).configureEach {
-    options.encoding = "utf-8"
-}
-
-java {
-    withSourcesJar()
-
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
-}
-
-jar {
-    from("LICENSE") {
-
-    }
-
-    with copySpec({
-        from(configurations.shadow.collect {
-            it.isDirectory() ? it : zipTree(it)
-        })
-
-        duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
-    })
-
-    manifest {
-        attributes(
-                'Main-Class': project.main_class,
-                'Multi-Release': 'true',
-        )
-    }
+artifacts {
+    archives sourceJar
 }
 
 sourceCompatibility = JavaVersion.VERSION_21

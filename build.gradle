@@ -68,7 +68,7 @@ dependencies {
     implementation 'org.antlr:antlr4:4.13.2'
     shadow 'org.antlr:antlr4-runtime:4.13.2'
 
-    implementation 'com.github.cao.awa:sinuatum:1.0.15'
+    implementation 'com.github.cao.awa:sinuatum:1.0.17'
 }
 
 test {
@@ -110,13 +110,5 @@ jar {
     }
 }
 
-//compileKotlin {
-//    kotlinOptions {
-//        jvmTarget = '21'
-//    }
-//}
-//compileTestKotlin {
-//    kotlinOptions {
-//        jvmTarget = '21'
-//    }
-//}
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21

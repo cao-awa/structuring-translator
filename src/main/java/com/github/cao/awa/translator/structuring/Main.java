@@ -39,7 +39,10 @@ public class Main {
 
             System.out.println("-- Generate kotlin script");
 
-            String generatedKotlin = StructuringTranslator.translate(LanguageTranslateTarget.KOTLIN_SCRIPT, TypescriptTranslateElement.FILE, ast);
+            String generatedKotlin = StructuringTranslator.translate(LanguageTranslateTarget.KOTLIN_SCRIPT,
+                                                                     TypescriptTranslateElement.FILE,
+                                                                     ast
+            );
             System.out.println(generatedKotlin);
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,11 +57,15 @@ public class Main {
         parser.addErrorListener(new BaseErrorListener() {
             @Override
             public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
-                throw new RuntimeException("Expected symbol '" + offendingSymbol + "' but error in line " + line + " chars " + charPositionInLine + ": " + msg, e);
+                throw new RuntimeException("Expected symbol '" + offendingSymbol + "' but error in line " + line + " chars " + charPositionInLine + ": " + msg,
+                                           e
+                );
             }
         });
 
-        printTree("", programContext);
+        printTree("",
+                  programContext
+        );
 
         LanguageTypescriptVisitor visitor = new LanguageTypescriptVisitor();
         return visitor.visitProgram(programContext);
@@ -67,15 +74,19 @@ public class Main {
     public static void printTree(String indent, ParseTree tree) {
         if (tree instanceof TerminalNode) {
             if (tree instanceof ErrorNode error) {
-                System.out.println(indent + "Token: " + tree.getText() + " (" + tree.getClass().getSimpleName() + ")");
+                System.out.println(indent + "Token: " + tree.getText() + " (" + tree.getClass().getSimpleName() + " / " + error.getText() + ")"
+                );
             } else {
                 System.out.println(indent + "Token: " + tree.getText());
             }
         } else {
-            System.out.println(indent + tree.getClass().getSimpleName());
+            System.out.println(indent + tree.getClass()
+                                            .getSimpleName());
         }
         for (int i = 0; i < tree.getChildCount(); i++) {
-            printTree(indent + "    ", tree.getChild(i));
+            printTree(indent + "    ",
+                      tree.getChild(i)
+            );
         }
     }
 }

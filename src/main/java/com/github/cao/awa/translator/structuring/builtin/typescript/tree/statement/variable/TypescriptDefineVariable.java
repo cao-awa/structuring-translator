@@ -1,7 +1,6 @@
 package com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.variable;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.github.cao.awa.sinuatum.manipulate.Manipulate;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.vararg.TypescriptArgType;
@@ -89,19 +88,19 @@ public class TypescriptDefineVariable extends TypescriptStatement {
 
     @Override
     public void preprocess() {
-        Manipulate.makeNonNull(this.type, TypescriptArgType::preprocess);
-        Manipulate.makeNonNull(this.assignment, TypescriptResultStatement::preprocess);
+        this.type.preprocess();
+        this.assignment.preprocess();
     }
 
     @Override
     public void postprocess() {
-        Manipulate.makeNonNull(this.type, TypescriptArgType::postprocess);
-        Manipulate.makeNonNull(this.assignment, TypescriptResultStatement::postprocess);
+        this.type.postprocess();
+        this.assignment.postprocess();
     }
 
     @Override
     public void consequence() {
-        Manipulate.makeNonNull(this.type, TypescriptArgType::consequence);
-        Manipulate.makeNonNull(this.assignment, TypescriptResultStatement::consequence);
+        this.type.consequence();
+        this.assignment.consequence();
     }
 }

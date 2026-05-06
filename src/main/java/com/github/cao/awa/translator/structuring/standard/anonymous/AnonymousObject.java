@@ -1,12 +1,11 @@
 package com.github.cao.awa.translator.structuring.standard.anonymous;
 
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
-
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 public class AnonymousObject<Object> implements Iterable<Map.Entry<String, Object>> {
-    private final Map<String, Object> delegate = CollectionFactor.hashMap();
+    private final Map<String, Object> delegate = new HashMap<>();
 
     public void set(String key, Object element) {
         this.delegate.put(key, element);

@@ -8,9 +8,9 @@ import com.github.cao.awa.translator.structuring.builtin.typescript.translator.e
 import com.github.cao.awa.translator.structuring.builtin.typescript.translator.kts.TypescriptKotlinScriptTranslator;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.TypescriptFile;
 import com.github.cao.awa.translator.structuring.builtin.typescript.visitor.LanguageTypescriptVisitor;
+import com.github.cao.awa.translator.structuring.io.IOUtil;
 import com.github.cao.awa.translator.structuring.translate.StructuringTranslator;
 import com.github.cao.awa.translator.structuring.translate.language.LanguageTranslateTarget;
-import com.github.cao.awa.sinuatum.util.io.IOUtil;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;

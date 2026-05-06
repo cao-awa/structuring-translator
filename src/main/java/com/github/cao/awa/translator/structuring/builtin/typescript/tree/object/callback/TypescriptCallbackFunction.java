@@ -6,12 +6,12 @@ import com.github.cao.awa.translator.structuring.builtin.typescript.tree.stateme
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.function.TypescriptParamList;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class TypescriptCallbackFunction extends TypescriptResultStatement {
-    private final List<TypescriptStatement> statements = CollectionFactor.linkedList();
+    private final List<TypescriptStatement> statements = new LinkedList<>();
     private TypescriptParamList params;
 
     public TypescriptCallbackFunction addStatement(TypescriptStatement statement) {

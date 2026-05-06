@@ -6,14 +6,14 @@ import com.github.cao.awa.translator.structuring.builtin.typescript.tree.stateme
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.invoke.param.TypescriptInvokeParamList;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TypescriptInvoke extends TypescriptResultStatement {
     private TypescriptInvokeParamList params;
     private TypescriptInvokeObject invokeTarget;
-    private final List<TypescriptInvoke> fluentInvokes = CollectionFactor.arrayList();
+    private final List<TypescriptInvoke> fluentInvokes = new ArrayList<>();
     private boolean isFluent = false;
     private TypescriptResultStatement fluentAccessArray;
 

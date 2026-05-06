@@ -4,12 +4,12 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class TypescriptFunction extends TypescriptStatement {
-    private final List<TypescriptStatement> statements = CollectionFactor.linkedList();
+    private final List<TypescriptStatement> statements = new LinkedList<>();
     private TypescriptParamList params;
     private String name;
 

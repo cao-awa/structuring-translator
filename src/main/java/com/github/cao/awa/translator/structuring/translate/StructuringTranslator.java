@@ -4,12 +4,12 @@ import com.github.cao.awa.translator.structuring.translate.base.StructuringEleme
 import com.github.cao.awa.translator.structuring.translate.language.LanguageTranslateTarget;
 import com.github.cao.awa.translator.structuring.translate.element.TranslateElementData;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.manipulate.Manipulate;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
+import com.github.cao.awa.translator.structuring.cast.Caster;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -17,8 +17,8 @@ import java.util.function.Function;
 
 public abstract class StructuringTranslator<T extends StructuringAst> implements StructuringElementTranslator<T> {
     public static final String DEFAULT_PROVIDER = "generic";
-    public static final String VERSION = "1.1.5";
-    private static final Map<String, Map<LanguageTranslateTarget, Map<TranslateElementData<?>, StructuringTranslator<?>>>> translators = CollectionFactor.hashMap();
+    public static final String VERSION = "1.1.6";
+    private static final Map<String, Map<LanguageTranslateTarget, Map<TranslateElementData<?>, StructuringTranslator<?>>>> translators = new HashMap<>();
     private static boolean enableLineWrap = true;
     private static boolean enableIndent = true;
     private String requiredProvider = DEFAULT_PROVIDER;
@@ -117,11 +117,11 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
                 provider,
                 (key, map) -> {
                     if (map == null) {
-                        map = CollectionFactor.hashMap();
+                        map = new HashMap<>();
                     }
 
                     map.computeIfAbsent(target,
-                                        k -> CollectionFactor.hashMap()
+                                        k -> new HashMap<>()
                     );
 
                     map.get(target)
@@ -181,7 +181,7 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
         translator.requestProvider(provider)
                   .postTranslate(
                           builder,
-                          Manipulate.cast(ast),
+                          Caster.cast(ast),
                           translator
                   );
         return builder.toString();
@@ -197,7 +197,7 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
         translator.requestProvider(DEFAULT_PROVIDER)
                   .postTranslate(
                           builder,
-                          Manipulate.cast(ast),
+                          Caster.cast(ast),
                           translator
                   );
         return builder.toString();
@@ -319,7 +319,7 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
     }
 
     public static <X extends StructuringAst> StructuringTranslator<X> translator(String provider, LanguageTranslateTarget target, TranslateElementData<X> element) {
-        return Manipulate.cast(
+        return Caster.cast(
                 getTranslator(provider,
                               target,
                               element
@@ -327,7 +327,7 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
     }
 
     public static <X extends StructuringAst> StructuringTranslator<X> translator(LanguageTranslateTarget target, TranslateElementData<X> element) {
-        return Manipulate.cast(
+        return Caster.cast(
                 getTranslator(DEFAULT_PROVIDER,
                               target,
                               element
@@ -335,7 +335,7 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
     }
 
     public <X extends StructuringAst> StructuringTranslator<X> translator(String provider, TranslateElementData<X> element) {
-        return Manipulate.cast(
+        return Caster.cast(
                 getTranslator(provider,
                               target(),
                               element
@@ -343,7 +343,7 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
     }
 
     public <X extends StructuringAst> StructuringTranslator<X> translator(TranslateElementData<X> element) {
-        return Manipulate.cast(
+        return Caster.cast(
                 getTranslator(this.requiredProvider,
                               target(),
                               element
@@ -355,7 +355,7 @@ public abstract class StructuringTranslator<T extends StructuringAst> implements
             return;
         }
         T recovery = this.ast;
-        StructuringTranslator<X> translator = Manipulate.cast(
+        StructuringTranslator<X> translator = Caster.cast(
                 getTranslator(this.requiredProvider,
                               target(),
                               element

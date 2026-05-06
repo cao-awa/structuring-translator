@@ -4,13 +4,12 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class TypescriptArgType extends TypescriptStatement {
-    private final LinkedList<TypescriptArgType> args = CollectionFactor.linkedList();
+    private final LinkedList<TypescriptArgType> args = new LinkedList<>();
     private String name;
     private boolean arrayArgType = false;
     private int arraySize = -1;

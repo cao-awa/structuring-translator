@@ -4,7 +4,7 @@ import com.github.cao.awa.translator.structuring.builtin.typescript.translator.e
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.translate.StructuringTranslator;
 import com.github.cao.awa.translator.structuring.translate.base.StructuringElementTranslator;
-import com.github.cao.awa.sinuatum.manipulate.Manipulate;
+import com.github.cao.awa.translator.structuring.cast.Caster;
 
 public interface TypescriptStatementElementTranslator<T extends TypescriptStatement> extends StructuringElementTranslator<T> {
     default void translateStatement(StructuringTranslator<T> translator) {
@@ -12,7 +12,7 @@ public interface TypescriptStatementElementTranslator<T extends TypescriptStatem
         StringBuilder builder = translator.builder();
 
         translator.translator(TypescriptTranslateElement.byType(ast.getClass()), next -> {
-            next.postTranslate(builder, Manipulate.cast(ast), translator);
+            next.postTranslate(builder, Caster.cast(ast), translator);
         });
     }
 

@@ -4,12 +4,12 @@ import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TypescriptFor extends TypescriptStatement {
-    private final List<TypescriptStatement> statements = CollectionFactor.arrayList();
+    private final List<TypescriptStatement> statements = new ArrayList<>();
     private TypescriptStatement initStatement;
     private TypescriptResultStatement condition;
     private TypescriptResultStatement operationStatement;

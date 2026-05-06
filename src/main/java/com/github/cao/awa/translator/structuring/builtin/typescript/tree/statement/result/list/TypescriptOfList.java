@@ -3,12 +3,12 @@ package com.github.cao.awa.translator.structuring.builtin.typescript.tree.statem
 import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TypescriptOfList extends TypescriptResultStatement {
-    private final List<TypescriptResultStatement> elements = CollectionFactor.arrayList();
+    private final List<TypescriptResultStatement> elements = new ArrayList<>();
 
     public TypescriptOfList addElement(TypescriptResultStatement element) {
         this.elements.add(element);

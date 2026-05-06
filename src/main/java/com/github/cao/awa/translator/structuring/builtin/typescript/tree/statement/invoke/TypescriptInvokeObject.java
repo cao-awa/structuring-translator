@@ -4,12 +4,12 @@ import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.invoke.access.TypescriptInvokeAccess;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class TypescriptInvokeObject extends TypescriptResultStatement {
-    private final List<TypescriptInvokeAccess> accesses = CollectionFactor.linkedList();
+    private final List<TypescriptInvokeAccess> accesses =new LinkedList<>();
 
     public TypescriptInvokeObject addAccess(TypescriptInvokeAccess access) {
         this.accesses.add(access);

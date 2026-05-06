@@ -3,12 +3,12 @@ package com.github.cao.awa.translator.structuring.builtin.typescript.tree.statem
 import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class TypescriptParamList extends TypescriptStatement {
-    private final List<TypescriptParamType> args = CollectionFactor.linkedList();
+    private final List<TypescriptParamType> args = new LinkedList<>();
 
     public void addArg(TypescriptParamType arg) {
         this.args.add(arg);

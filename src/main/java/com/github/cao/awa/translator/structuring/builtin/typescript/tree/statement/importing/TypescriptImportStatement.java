@@ -3,12 +3,12 @@ package com.github.cao.awa.translator.structuring.builtin.typescript.tree.statem
 import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class TypescriptImportStatement extends TypescriptStatement {
-    private final List<String> imports = CollectionFactor.linkedList();
+    private final List<String> imports = new LinkedList<>();
     private String from;
 
     public TypescriptImportStatement from(String from) {

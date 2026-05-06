@@ -4,15 +4,18 @@ import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class TypescriptAnonymousObjectParamList extends TypescriptStatement {
-    private final Map<String, TypescriptResultStatement> values = CollectionFactor.hashMap();
+    private final Map<String, TypescriptResultStatement> values = new HashMap<>();
 
     public TypescriptAnonymousObjectParamList addValue(String key, TypescriptResultStatement value) {
-        this.values.put(key, value);
+        this.values.put(
+                key,
+                value
+        );
         return this;
     }
 

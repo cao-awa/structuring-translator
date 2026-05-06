@@ -5,7 +5,7 @@ import com.github.cao.awa.translator.structuring.builtin.typescript.translator.e
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.control.calculate.symbol.TypescriptSymbol;
 import com.github.cao.awa.translator.structuring.translate.StructuringTranslator;
-import com.github.cao.awa.sinuatum.manipulate.Manipulate;
+import com.github.cao.awa.translator.structuring.cast.Caster;
 
 public interface TypescriptSymbolTranslator<S extends TypescriptSymbol> extends TypescriptStatementElementTranslator<S> {
     default void translateSymbol(StructuringTranslator<S> translator) {
@@ -13,7 +13,7 @@ public interface TypescriptSymbolTranslator<S extends TypescriptSymbol> extends 
         StringBuilder builder = translator.builder();
 
         translator.translator(TypescriptTranslateElement.byType(ast.getClass()), next -> {
-            next.postTranslate(builder, Manipulate.cast(ast), translator);
+            next.postTranslate(builder, Caster.cast(ast), translator);
         });
     }
 }

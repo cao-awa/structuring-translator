@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.control.calculate.symbol.TypescriptSymbol;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
 import java.util.LinkedList;
 
@@ -13,7 +12,7 @@ public class TypescriptCalculate extends TypescriptResultStatement {
     private TypescriptResultStatement left;
     private TypescriptSymbol symbol;
     private TypescriptResultStatement right;
-    private LinkedList<TypescriptCalculate> rights = CollectionFactor.linkedList();
+    private LinkedList<TypescriptCalculate> rights = new LinkedList<>();
     private boolean leftWithParen;
     private boolean rightWithParen;
     private boolean totalWithParen;

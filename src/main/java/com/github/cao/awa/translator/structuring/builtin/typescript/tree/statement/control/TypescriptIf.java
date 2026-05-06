@@ -5,13 +5,13 @@ import com.alibaba.fastjson2.JSONObject;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.result.TypescriptResultStatement;
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.TypescriptStatement;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class TypescriptIf extends TypescriptResultStatement {
-    private final List<TypescriptStatement> statements = CollectionFactor.linkedList();
-    private final List<TypescriptStatement> elseStatements = CollectionFactor.linkedList();
+    private final List<TypescriptStatement> statements = new LinkedList<>();
+    private final List<TypescriptStatement> elseStatements = new LinkedList<>();
     private TypescriptIf elseIfStatement;
     private TypescriptResultStatement predicate;
 

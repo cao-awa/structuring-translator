@@ -42,13 +42,13 @@ import com.github.cao.awa.translator.structuring.builtin.typescript.tree.stateme
 import com.github.cao.awa.translator.structuring.builtin.typescript.tree.statement.variable.TypescriptDefineVariable;
 import com.github.cao.awa.translator.structuring.translate.element.TranslateElementData;
 import com.github.cao.awa.translator.structuring.translate.tree.StructuringAst;
-import com.github.cao.awa.sinuatum.manipulate.Manipulate;
-import com.github.cao.awa.sinuatum.util.collection.CollectionFactor;
+import com.github.cao.awa.translator.structuring.cast.Caster;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class TypescriptTranslateElement {
-    private static final Map<Class<?>, TranslateElementData<?>> elements = CollectionFactor.hashMap();
+    private static final Map<Class<?>, TranslateElementData<?>> elements = new HashMap<>();
 
     public static final TranslateElementData<TypescriptFile> FILE = create(TypescriptFile.class);
     public static final TranslateElementData<TypescriptStatement> STATEMENT = create(TypescriptStatement.class);
@@ -127,6 +127,6 @@ public class TypescriptTranslateElement {
     }
 
     public static <X extends StructuringAst> TranslateElementData<X> byType(Class<X> type) {
-        return Manipulate.cast(elements.get(type));
+        return Caster.cast(elements.get(type));
     }
 }

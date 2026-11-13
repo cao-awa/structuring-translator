@@ -13,6 +13,10 @@ application {
     mainClass = 'com.github.kusa233.translator.structuring.Main'
 }
 
+tasks.withType(GenerateModuleMetadata).configureEach {
+    dependsOn tasks.withType(Jar)
+}
+
 publishing {
     publications {
         gpr(MavenPublication) {
@@ -38,7 +42,6 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.9.0'
 
     implementation 'org.jetbrains:annotations:24.1.0'
-
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
 }
 

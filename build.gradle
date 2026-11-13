@@ -1,10 +1,17 @@
 plugins {
     id 'java'
+    id 'application'
     id 'maven-publish'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 group = "$project.group_id"
 version = "$project.version_name"
+
+application {
+    applicationName = 'structuring-translator'
+    mainClass = 'com.github.kusa233.translator.structuring.Main'
+}
 
 publishing {
     publications {
@@ -28,15 +35,19 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.9.0'
 
     implementation 'org.jetbrains:annotations:24.1.0'
 
-    implementation 'com.alibaba.fastjson2:fastjson2:2.0.50'
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.21")
+}
 
-    implementation 'org.antlr:antlr4:4.13.2'
-    implementation 'org.antlr:antlr4-runtime:4.13.2'
-
-//    implementation 'com.github.cao-awa:Sinuatum:1.0.17'
+tasks.named('test') {
+    useJUnitPlatform()
+    testLogging {
+        events 'failed', 'skipped'
+        exceptionFormat = 'full'
+    }
 }
 
 tasks.register('sourceJar', Jar) {
@@ -49,5 +60,10 @@ artifacts {
     archives sourceJar
 }
 
-sourceCompatibility = JavaVersion.VERSION_21
-targetCompatibility = JavaVersion.VERSION_21
+kotlin {
+    jvmToolchain(21)
+}
+
+java {
+    withSourcesJar()
+}

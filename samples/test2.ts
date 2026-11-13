@@ -1,12 +1,12 @@
-const set = new Set();
+const s = new Set();
 
-set.add("awa");
-set.add("www");
-set.add("zzz");
+s.add("awa");
+s.add("www");
+s.add("zzz");
 
-println(set);
+println(s);
 
-const keys = set.keys();
+const keys = s.keys();
 
 while (true) {
     const next = keys.next();
@@ -18,6 +18,6 @@ while (true) {
     }
 }
 
-for (i = 0; i < set.size; i++) {
+for (i = 0; i < s.size; i++) {
     println(i);
 }

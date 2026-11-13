@@ -50,16 +50,6 @@ tasks.named('test') {
     }
 }
 
-tasks.register('sourceJar', Jar) {
-    dependsOn classes
-    archiveClassifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives sourceJar
-}
-
 kotlin {
     jvmToolchain(21)
 }
